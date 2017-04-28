@@ -14,8 +14,9 @@ import java.util.ArrayList;
  *
  * @author gerardj
  */
-public class oracleRadioGroup {
+public class oracleRadioGroup  {
     String                       m_oracleRadioGroupName;
+    
     String                       m_oracleRadioGroupItemType;
     String                       m_oracleRadioGroupAccessKey;
     String                       m_oracleRadioGroupMappingofOtherValues;
@@ -125,6 +126,179 @@ public class oracleRadioGroup {
         this.m_oracleRadioGroupTrigger                  = p_oracleRadioGroupTrigger;
         this.m_ListButton                               = p_ListButton;
     }
+
+    public String getoracleRadioGroupName() {
+        return m_oracleRadioGroupName;
+    }
+
+    public String getoracleRadioGroupItemType() {
+        return m_oracleRadioGroupItemType;
+    }
+
+    public String getoracleRadioGroupAccessKey() {
+        return m_oracleRadioGroupAccessKey;
+    }
+
+    public String getoracleRadioGroupMappingofOtherValues() {
+        return m_oracleRadioGroupMappingofOtherValues;
+    }
+
+    public String getoracleRadioGroupPopupMenu() {
+        return m_oracleRadioGroupPopupMenu;
+    }
+
+    public String getoracleRadioGroupKeyboardNavigable() {
+        return m_oracleRadioGroupKeyboardNavigable;
+    }
+
+    public String getoracleRadioGroupMouseNavigate() {
+        return m_oracleRadioGroupMouseNavigate;
+    }
+
+    public String getoracleRadioGroupPreviousNavigationItem() {
+        return m_oracleRadioGroupPreviousNavigationItem;
+    }
+
+    public String getoracleRadioGroupNextNavigationItem() {
+        return m_oracleRadioGroupNextNavigationItem;
+    }
+
+    public String getoracleRadioGroupDataType() {
+        return m_oracleRadioGroupDataType;
+    }
+
+    public String getoracleRadioGroupDataLengthSemantics() {
+        return m_oracleRadioGroupDataLengthSemantics;
+    }
+
+    public String getoracleRadioGroupMaximumLength() {
+        return m_oracleRadioGroupMaximumLength;
+    }
+
+    public String getoracleRadioGroupInitialValue() {
+        return m_oracleRadioGroupInitialValue;
+    }
+
+    public String getoracleRadioGroupCopyValueFromItem() {
+        return m_oracleRadioGroupCopyValueFromItem;
+    }
+
+    public String getoracleRadioGroupSynchronizeWithItem() {
+        return m_oracleRadioGroupSynchronizeWithItem;
+    }
+
+    public String getoracleRadioGroupCalculationMode() {
+        return m_oracleRadioGroupCalculationMode;
+    }
+
+    public String getoracleRadioGroupFormula() {
+        return m_oracleRadioGroupFormula;
+    }
+
+    public String getoracleRadioGroupSummaryFunction() {
+        return m_oracleRadioGroupSummaryFunction;
+    }
+
+    public String getoracleRadioGroupSummarizedBlock() {
+        return m_oracleRadioGroupSummarizedBlock;
+    }
+
+    public String getoracleRadioGroupSummarizedItem() {
+        return m_oracleRadioGroupSummarizedItem;
+    }
+
+    public String getoracleRadioGroupNumberOfItemDisplayed() {
+        return m_oracleRadioGroupNumberOfItemDisplayed;
+    }
+
+    public String getoracleRadioGroupDatabaseItem() {
+        return m_oracleRadioGroupDatabaseItem;
+    }
+
+    public String getoracleRadioGroupColumnName() {
+        return m_oracleRadioGroupColumnName;
+    }
+
+    public String getoracleRadioGroupPrimaryKey() {
+        return m_oracleRadioGroupPrimaryKey;
+    }
+
+    public String getoracleRadioGroupQueryOnly() {
+        return m_oracleRadioGroupQueryOnly;
+    }
+
+    public String getoracleRadioGroupQueryAllowed() {
+        return m_oracleRadioGroupQueryAllowed;
+    }
+
+    public String getoracleRadioGroupInsertAllowed() {
+        return m_oracleRadioGroupInsertAllowed;
+    }
+
+    public String getoracleRadioGroupUpdateAllowed() {
+        return m_oracleRadioGroupUpdateAllowed;
+    }
+
+    public String getoracleRadioGroupForegroundColor() {
+        return m_oracleRadioGroupForegroundColor;
+    }
+
+    public String getoracleRadioGroupBackgroundColor() {
+        return m_oracleRadioGroupBackgroundColor;
+    }
+
+    public String getoracleRadioGroupFillPattern() {
+        return m_oracleRadioGroupFillPattern;
+    }
+
+    public String getoracleRadioGroupFont() {
+        return m_oracleRadioGroupFont;
+    }
+
+    public String getoracleRadioGroupFontName() {
+        return m_oracleRadioGroupFontName;
+    }
+
+    public String getoracleRadioGroupFontSize() {
+        return m_oracleRadioGroupFontSize;
+    }
+
+    public String getoracleRadioGroupFontWeight() {
+        return m_oracleRadioGroupFontWeight;
+    }
+
+    public String getoracleRadioGroupFontStyle() {
+        return m_oracleRadioGroupFontStyle;
+    }
+
+    public String getoracleRadioGroupFontSpacing() {
+        return m_oracleRadioGroupFontSpacing;
+    }
+
+    public String getoracleRadioGroupHint() {
+        return m_oracleRadioGroupHint;
+    }
+
+    public String getoracleRadioGroupDisplayHintAutomatically() {
+        return m_oracleRadioGroupDisplayHintAutomatically;
+    }
+
+    public String getoracleRadioGroupTooltip() {
+        return m_oracleRadioGroupTooltip;
+    }
+
+    public String getoracleRadioGroupDirection() {
+        return m_oracleRadioGroupDirection;
+    }
+
+    public String getoracleRadioGroupTrigger() {
+        return m_oracleRadioGroupTrigger;
+    }
+
+    public ArrayList<oracleRadioButton> getListButton() {
+        return m_ListButton;
+    }
+    
 }
 
 

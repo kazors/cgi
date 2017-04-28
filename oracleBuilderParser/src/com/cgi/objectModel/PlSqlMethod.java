@@ -33,6 +33,11 @@ public class PlSqlMethod {
         
         this.m_method = p_method;
     }
+
+    public String get_method() {
+        return m_method;
+    }
+    
 }
 
 

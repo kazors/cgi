@@ -22,6 +22,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 
@@ -40,39 +41,78 @@ public class OracleBuilderParser {
      */
     static String m_currentState;
     public static void main(String[] args) {
-
-       
-
         
-        ParseFile("test.txt");
+        FileWriter v_fileWriter= null;
+        try {
+            v_fileWriter = new FileWriter(new File("test.txt"));
+            ArrayList<oracleBlock> v_blockList=ParseFile("cc__e_1206.txt");
+            v_fileWriter.write("Il y a "+v_blockList.get(0).getListItem().size()+" item  dans ce fichier \n");
+            for(oracleBlock e : v_blockList){
+                for(oracleItem v : e.getListItem()){
+                v_fileWriter.write("L'item "+v.getobjectName()+" est un objet de type "+v.getobjectItemType()+"\n");
+                v_fileWriter.write("Il accepte des donnée de type "+v.getobjectDataType()+"\n sa position en x est "+v.getobjectPositionX());
+                v_fileWriter.write("et sa position en y "+v.getobjectPositionY()+"\n");
+                v_fileWriter.write("il y a "+v.getlistMethod().size()+" methode pl sql associé \n");
+               
+                }v_fileWriter.write("il y a "+e.getlistRadioGroup().get(0).getListButton().size());}
+        } catch (IOException ex) {
+            Logger.getLogger(OracleBuilderParser.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                v_fileWriter.close();
+            } catch (IOException ex) {
+                Logger.getLogger(OracleBuilderParser.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
     }
 
-    public static void ParseFile(String p_cheminRelatifDuFichier) {
+    public static ArrayList<oracleBlock> ParseFile(String p_cheminRelatifDuFichier) {
+        
         File                  v_fichier    = new File(p_cheminRelatifDuFichier);
         ArrayList<oracleItem> v_listObject = new ArrayList<>();
         ArrayList<oracleBlock> v_listBlock=new ArrayList<>();
+        ArrayList<oracleRadioGroup> v_listRadioGroup=new ArrayList<>();
         try {
             RandomAccessFile v_fileAccess = new RandomAccessFile(v_fichier, "r");
-            avancerJusqua(v_fileAccess, "- Relations");
+            avancerJusqua(v_fileAccess,v_fileAccess.getFilePointer(), "- Relations");
+           
+            
             nextLine(1, v_fileAccess);
+            
             m_currentState="Item";
-            avancerJusqua(v_fileAccess, "- Relations");
+            avancerJusqua(v_fileAccess,v_fileAccess.getFilePointer(), "- Relations");
             nextLine(1, v_fileAccess);
+            
             v_listBlock.add(getBlock(v_fileAccess));
-            avancerJusqua(v_fileAccess, "* Items");
+            avancerJusqua(v_fileAccess,v_fileAccess.getFilePointer(), "* Items");
             nextLine(1, v_fileAccess);
+            
             do{switch(m_currentState){
+                case "Block":
+                    v_listBlock.add(getBlock(v_fileAccess));
+                    break;
                 case "Item" :
                     v_listObject.add(getItem(v_fileAccess));
-                    checkWhatsNext(v_fileAccess, m_currentState);
+                    
+                    
+                     
+                    
+                    m_currentState=checkWhatsNext(v_fileAccess, m_currentState);
                     break;
                 case "Method" :
                     v_listObject.get(v_listObject.size()-1).addMethod(getMethod(v_fileAccess));
-                    checkWhatsNext(v_fileAccess, m_currentState);
+                    
+                    m_currentState=checkWhatsNext(v_fileAccess, m_currentState);
+                    break;
+                case "Radio Group" :
+                    v_listRadioGroup.add(getRadioGroup(v_fileAccess));
+                    m_currentState=checkWhatsNext(v_fileAccess, m_currentState);
+                    break;
                 case "Error" :
                     System.out.println("Erreur lors du parsage du fichier");
-                    System.exit(1);
-            }}while(!(v_listObject.get(v_listObject.size()-1).getobjectName().equals("DSP_LIB")));
+                    
+            }System.out.println("m_current = "+m_currentState);}while(!(m_currentState=="error"));
             
             
             
@@ -86,6 +126,9 @@ public class OracleBuilderParser {
         } catch (NullPointerException ex) {
             Logger.getLogger(OracleBuilderParser.class.getName()).log(Level.SEVERE, null, ex);
         }
+        v_listBlock.get(0).addItemList(v_listObject);
+        v_listBlock.get(0).addRadioGroupList(v_listRadioGroup);
+        return v_listBlock;
     }
 
     private static String getValueFromLine(String p_line) {
@@ -107,15 +150,26 @@ public class OracleBuilderParser {
         return p_value;
     }
 
-    private static String avancerJusqua(RandomAccessFile p_fileAccess, String p_regex) {
-        String v_value = null;
-
+    private static String avancerJusqua(RandomAccessFile p_fileAccess,long p_cursor, String p_regex) throws IOException {
+        String v_value = "test";
+        p_fileAccess.seek(p_cursor);
+        
         try {
-            while((v_value=p_fileAccess.readLine().trim()).startsWith(p_regex)){
-                System.out.println("v_value = "+v_value);
+            
+            boolean v_test=false;
+            
+            
+            while(!(v_test)){
+               
+                
+                v_value=(p_fileAccess.readLine()).trim();
+                v_test=v_value.startsWith(p_regex);
+                
+                
             }
             
         } catch (IOException ex) {
+            
             Logger.getLogger(OracleBuilderParser.class.getName()).log(Level.SEVERE, null, ex);
         }
 
@@ -141,7 +195,7 @@ public class OracleBuilderParser {
             nextLine(19, p_fileAccess);
 
             String v_objectComments      = p_fileAccess.readLine();
-            String v_objectEnabled       = delSpace(getValueFromLine(avancerJusqua(p_fileAccess, "* Enabled")));
+            String v_objectEnabled       = delSpace(getValueFromLine(avancerJusqua(p_fileAccess,p_fileAccess.getFilePointer(), "* Enabled")));
             String v_objectJustification = delSpace(getValueFromLine(p_fileAccess.readLine()));
 
             nextLine(1, p_fileAccess);
@@ -172,7 +226,7 @@ public class OracleBuilderParser {
             String v_objectDataSynchronizeWithItem = delSpace(getValueFromLine(p_fileAccess.readLine()));
             String v_objectCalculationMode         = delSpace(getValueFromLine(p_fileAccess.readLine()));
             String v_objectFormula                 = delSpace(getValueFromLine(p_fileAccess.readLine()));
-            System.out.println("v_objectFormula = "+v_objectName);
+            
             String v_objectSummaryFunction         = delSpace(getValueFromLine(p_fileAccess.readLine()));
             String v_objectSummarizedBlock         = delSpace(getValueFromLine(p_fileAccess.readLine()));
             String v_objectSummarizedItem          = delSpace(getValueFromLine(p_fileAccess.readLine()));
@@ -225,7 +279,8 @@ public class OracleBuilderParser {
             String v_objectFontWeight               = delSpace(getValueFromLine(p_fileAccess.readLine()));
             String v_objectFontStyle                = delSpace(getValueFromLine(p_fileAccess.readLine()));
             String v_objectFontSpacing              = delSpace(getValueFromLine(p_fileAccess.readLine()));
-            String v_objectHint                     = delSpace(getValueFromLine(avancerJusqua(p_fileAccess, "* Hint")));
+           
+            String v_objectHint                     = delSpace(getValueFromLine(avancerJusqua(p_fileAccess,p_fileAccess.getFilePointer(), "* Hint")));
             String v_objectDisplayHintAutomatically = delSpace(getValueFromLine(p_fileAccess.readLine()));
             String v_objectTooltip                  = delSpace(getValueFromLine(p_fileAccess.readLine()));
 
@@ -256,9 +311,9 @@ public class OracleBuilderParser {
         oracleBlock v_block = null;
 
         try {
-            String v_blockName                = delSpace(getValueFromLine(avancerJusqua(p_fileAccess, "* Name")));
+            String v_blockName                = delSpace(getValueFromLine(avancerJusqua(p_fileAccess,p_fileAccess.getFilePointer(), "* Name")));
             String v_blockSubclassInformation = delSpace(getValueFromLine(p_fileAccess.readLine()));
-            String v_blockNavigationStyle     = delSpace(getValueFromLine(avancerJusqua(p_fileAccess,
+            String v_blockNavigationStyle     = delSpace(getValueFromLine(avancerJusqua(p_fileAccess,p_fileAccess.getFilePointer(),
                                                     "- Navigation Style")));
             String v_PreviousNavigationDataBlock  = delSpace(getValueFromLine(p_fileAccess.readLine()));
             String v_blockNextNavigationDataBlock = delSpace(getValueFromLine(p_fileAccess.readLine()));
@@ -330,8 +385,8 @@ public class OracleBuilderParser {
                 Integer.parseInt(v_tmp);}
             String v_blockPrecomputeSumarries             = delSpace(getValueFromLine(p_fileAccess.readLine()));
             String v_blockDMLReturningValues              = delSpace(getValueFromLine(p_fileAccess.readLine()));
-
-            avancerJusqua(p_fileAccess, "* Triggers");
+            System.out.println("385 : "+v_blockDMLReturningValues);
+            avancerJusqua(p_fileAccess,p_fileAccess.getFilePointer(), "* Triggers");
             v_block = new oracleBlock(v_blockName, v_blockSubclassInformation, v_blockNavigationStyle,
                                       v_PreviousNavigationDataBlock, v_blockNextNavigationDataBlock,
                                       v_blockQueryArraySize, v_blockNumberOfRecordsBuffered,
@@ -352,7 +407,7 @@ public class OracleBuilderParser {
                                       v_blockLockProcedureName, v_blockLockProcedureResultSetColumns,
                                       v_blockLockProcedureArguments, v_blockDMLArraySize, v_blockPrecomputeSumarries,
                                       v_blockDMLReturningValues, new ArrayList<>(),
-                                      new ArrayList<>());
+                                      new ArrayList<>(), new ArrayList<>());
         } catch (IOException ex) {
             Logger.getLogger(OracleBuilderParser.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -371,23 +426,31 @@ public class OracleBuilderParser {
                 nextLine(19, p_fileAccess);
 
                 if (delSpace(getValueFromLine(p_fileAccess.readLine().trim())).equals("PL/SQL")) {
+                    
                     p_fileAccess.seek(v_currentPos);
-                    avancerJusqua(p_fileAccess, "----------");
+                    avancerJusqua(p_fileAccess,p_fileAccess.getFilePointer(), "----------");
                     return "Method";
                 }
                 break;    
             case "Method" :
-                nextLine(1, p_fileAccess);
-                if((delSpace(getValueFromLine(p_fileAccess.readLine().trim())).startsWith("* Fire in Enter-Query"))){
+                nextLine(9, p_fileAccess);
+                
+                if((delSpace(getValueFromLine(p_fileAccess.readLine().trim()))).startsWith("PL/SQL")){
+                    System.out.println("lololo");
                     p_fileAccess.seek(v_currentPos);
-                    avancerJusqua(p_fileAccess, "----------");
+                    avancerJusqua(p_fileAccess,p_fileAccess.getFilePointer(), "----------");
+                    
                     return "Method";
+                    
                 }
                 p_fileAccess.seek(v_currentPos);
-                nextLine(7, p_fileAccess);
-                if((delSpace(getValueFromLine(p_fileAccess.readLine().trim())).startsWith("* Name"))){
+                nextLine(8, p_fileAccess);
+                System.out.println("450 :"+p_fileAccess.readLine());
+                if((p_fileAccess.readLine().trim()).startsWith("* Item Type")){
+                    
                     p_fileAccess.seek(v_currentPos);
-                    nextLine(7, p_fileAccess);
+                    nextLine(8, p_fileAccess);
+                    
                     return "Item";
                 }else{
                     nextLine(1, p_fileAccess);
@@ -398,25 +461,40 @@ public class OracleBuilderParser {
                 }
                 
             }break;
+            case "Radio Group" :
+                nextLine(17, p_fileAccess);
+                if(p_fileAccess.readLine().trim().startsWith("* Item Type")){
+                    return "Item";
+                }
+                break;
             case "Item" :
-                nextLine(8, p_fileAccess);
+                nextLine(9, p_fileAccess);
+                
+                
                 if((delSpace(getValueFromLine(p_fileAccess.readLine().trim())).equals("PL/SQL"))){
+                    
                     p_fileAccess.seek(v_currentPos);
-                    nextLine(5, p_fileAccess);
+                    nextLine(6, p_fileAccess);
+                    
                     return "Method";
                 }
                 p_fileAccess.seek(v_currentPos);
-                nextLine(6, p_fileAccess);
-                if(p_fileAccess.readLine().trim().startsWith("* Item Type")){
+                nextLine(7, p_fileAccess);
+                
+                String v_test3=p_fileAccess.readLine().trim();
+                
+                if((v_test3.startsWith("* Item Type"))||(v_test3.startsWith("^ Item Type"))){
                     p_fileAccess.seek(v_currentPos);
                     nextLine(6, p_fileAccess);
-                    if((delSpace(getValueFromLine(p_fileAccess.readLine().trim())).equals("Radio Group"))){
+                    System.out.println("439 :"+p_fileAccess.readLine());
+                    
+                    if((delSpace(getValueFromLine(p_fileAccess.readLine())).equals("Radio Group"))){
                         p_fileAccess.seek(v_currentPos);
-                        nextLine(5, p_fileAccess);
+                        nextLine(6, p_fileAccess);
                         return "Radio Group";
                     }
                     p_fileAccess.seek(v_currentPos);
-                    nextLine(5, p_fileAccess);
+                    nextLine(6, p_fileAccess);
                     return "Item";
                     
                 }
@@ -430,6 +508,7 @@ public class OracleBuilderParser {
     }   catch (IOException ex) {
             Logger.getLogger(OracleBuilderParser.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
         return "error";
     }
 
@@ -449,7 +528,7 @@ public class OracleBuilderParser {
         try {
             String v_alertName                = delSpace(getValueFromLine(p_fileAccess.readLine()));
             String v_alertSubclassInformation = delSpace(getValueFromLine(p_fileAccess.readLine()));
-            String v_alertComments            = delSpace(getValueFromLine(avancerJusqua(p_fileAccess, "- Comments")));
+            String v_alertComments            = delSpace(getValueFromLine(avancerJusqua(p_fileAccess,p_fileAccess.getFilePointer(), "- Comments")));
             String v_alertTitle               = delSpace(getValueFromLine(p_fileAccess.readLine()));
             String v_alertMessage             = delSpace(getValueFromLine(p_fileAccess.readLine()));
             String v_alertStyle               = delSpace(getValueFromLine(p_fileAccess.readLine()));
@@ -502,7 +581,7 @@ public class OracleBuilderParser {
         try {
             String v_oracleRadioGroupName=delSpace(getValueFromLine(p_fileAccess.readLine()));
             String v_oracleRadioGroupItemType=delSpace(getValueFromLine(p_fileAccess.readLine()));
-            String v_oracleRadioGroupAccessKey=delSpace(getValueFromLine(avancerJusqua(p_fileAccess, "- Access Key")));
+            String v_oracleRadioGroupAccessKey=delSpace(getValueFromLine(avancerJusqua(p_fileAccess,p_fileAccess.getFilePointer(), "- Access Key")));
             String v_oracleRadioGroupMappingofOtherValue=delSpace(getValueFromLine(p_fileAccess.readLine()));
             String v_oracleRadioGroupPopupMenu=delSpace(getValueFromLine(p_fileAccess.readLine()));
             String v_oracleRadioGroupKeyboardNavigable=delSpace(getValueFromLine(p_fileAccess.readLine()));
@@ -557,8 +636,10 @@ public class OracleBuilderParser {
         ArrayList<oracleRadioButton> v_listButton=new ArrayList<>();
         
         try {
-            nextLine(2, p_fileAccess);
+            
+            
             do{
+                nextLine(4, p_fileAccess);
             String v_radioButtonName=delSpace(getValueFromLine(p_fileAccess.readLine()));
             String v_radioButtonSubClassInformation=delSpace(getValueFromLine(p_fileAccess.readLine()));
             String v_radioButtonComments=delSpace(getValueFromLine(p_fileAccess.readLine()));
@@ -583,37 +664,59 @@ public class OracleBuilderParser {
             String v_radioButtonFontWeight=delSpace(getValueFromLine(p_fileAccess.readLine()));
             String v_radioButtonFontStyle=delSpace(getValueFromLine(p_fileAccess.readLine()));
             String v_radioButtonFontSpacing=delSpace(getValueFromLine(p_fileAccess.readLine()));
+                
             v_listButton.add(new oracleRadioButton(v_radioButtonName, v_radioButtonSubClassInformation, v_radioButtonComments, v_radioButtonEnabled, v_radioButtonLabel, v_radioButtonAccessKey, v_radioButtonRadioButtonValue, v_radioButtonVisible, v_radioButtonXPosition, v_radioButtonYPosition, v_radioButtonWidth, v_radioButtonHeight, v_radioButtonForegroundColor, v_radioButtonBackgroundColor, v_radioButtonFillPattern, v_radioButtonFont, v_radioButtonFontName, v_radioButtonFontSize, v_radioButtonFontWeight, v_radioButtonFontStyle, v_radioButtonFontSpacing));
-                nextLine(15, p_fileAccess);
-            }while(!(p_fileAccess.readLine().trim().equals("----------")));
+                
+                
+            }while(NextIsARadioButton(p_fileAccess,p_fileAccess.getFilePointer()));
         } catch (IOException ex) {
             Logger.getLogger(OracleBuilderParser.class.getName()).log(Level.SEVERE, null, ex);
         }
         return v_listButton;
                 
     }
+    
+    private static boolean NextIsARadioButton(RandomAccessFile p_fileAccess,long p_position){
+        try {
+            nextLine(21, p_fileAccess);
+            System.out.println("674 :"+p_fileAccess.readLine().trim());
+            Boolean v_radioButton=p_fileAccess.readLine().trim().startsWith("* Radio Button Value");
+            p_fileAccess.seek(p_position);
+            if(v_radioButton){
+                nextLine(12, p_fileAccess);
+            }
+            return v_radioButton;
+        } catch (IOException ex) {
+            Logger.getLogger(OracleBuilderParser.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false ;
+    }
     private static PlSqlMethod getMethod(RandomAccessFile p_fileAccess){
         PlSqlMethod v_plSqlMethod=null;
         try {
-            String v_eventName=delSpace(getValueFromLine(avancerJusqua(p_fileAccess, "* Name")));
+            String v_eventName=delSpace(p_fileAccess.readLine());
+            
             String v_subclassInformation=delSpace(getValueFromLine(p_fileAccess.readLine()));
             String v_comments=delSpace(getValueFromLine(p_fileAccess.readLine()));
             String v_triggerStyle=delSpace(getValueFromLine(p_fileAccess.readLine()));
             String v_triggerText=delSpace(getValueFromLine(p_fileAccess.readLine()));
-            nextLine(1, p_fileAccess);
+            
             String v_name=formatMethodName(p_fileAccess.readLine());
             String v_methodDescription=formatMethodName(p_fileAccess.readLine());
+            
             String v_method="";
             String v_tmp="";
             while (!((v_tmp= p_fileAccess.readLine()).startsWith("END;"))) {
                             v_method = v_method + "\n" + v_tmp;
                         }
+            v_method=v_method+"\n"+"END;";
             v_plSqlMethod=new PlSqlMethod(v_eventName, v_subclassInformation, v_comments, v_triggerStyle, v_triggerText, v_name, v_methodDescription, v_method);
         } catch (IOException ex) {
             Logger.getLogger(OracleBuilderParser.class.getName()).log(Level.SEVERE, null, ex);
         }
         return v_plSqlMethod;
     }
+    
 }
 
 

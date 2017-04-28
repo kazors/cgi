@@ -71,6 +71,7 @@ public class oracleBlock {
     String                 m_blockDMLReturningValue;
     ArrayList<oracleItem>  m_ListItem;
     ArrayList<PlSqlMethod> m_ListMethod;
+    ArrayList<oracleRadioGroup> m_listRadioGroup;
 
     public oracleBlock(String p_blockName, String p_blockSubclassInformation, String p_blockNavigationStyle,
                        String p_blockPreviousNavigationDataBlock, String p_blockNextNavigationDataBlock,
@@ -93,7 +94,7 @@ public class oracleBlock {
                        String p_blockLockProcedureName, String p_blockLockProcedureResultSetColumns,
                        String p_blockLockProcedureArguments, int p_blockDMLArraySize,
                        String p_blockPrecomputeSummaries, String p_blockDMLReturningValue,
-                       ArrayList<oracleItem> p_ListItem, ArrayList<PlSqlMethod> p_ListMethod) {
+                       ArrayList<oracleItem> p_ListItem, ArrayList<PlSqlMethod> p_ListMethod, ArrayList<oracleRadioGroup> p_listRadioGroup) {
         this.m_blockName                            = p_blockName;
         this.m_blockSubclassInformation             = p_blockSubclassInformation;
         this.m_blockNavigationStyle                 = p_blockNavigationStyle;
@@ -145,6 +146,7 @@ public class oracleBlock {
         this.m_blockDMLReturningValue               = p_blockDMLReturningValue;
         this.m_ListItem                             = p_ListItem;
         this.m_ListMethod                           = p_ListMethod;
+        this.m_listRadioGroup                       = p_listRadioGroup;
     }
     private void AddMethod(PlSqlMethod p_method){
         m_ListMethod.add(p_method);
@@ -152,6 +154,216 @@ public class oracleBlock {
 
     public String getblockName() {
         return m_blockName;
+    }
+    public void addItemList(ArrayList<oracleItem> p_ListItem){
+        m_ListItem=p_ListItem;
+    }
+    public void addRadioGroupList(ArrayList<oracleRadioGroup>p_ListRadioGroup){
+        m_listRadioGroup=p_ListRadioGroup;
+    }
+
+    public String getblockSubclassInformation() {
+        return m_blockSubclassInformation;
+    }
+
+    public String getblockNavigationStyle() {
+        return m_blockNavigationStyle;
+    }
+
+    public String getblockPreviousNavigationDataBlock() {
+        return m_blockPreviousNavigationDataBlock;
+    }
+
+    public String getblockNextNavigationDataBlock() {
+        return m_blockNextNavigationDataBlock;
+    }
+
+    public int getblockQueryArraySize() {
+        return m_blockQueryArraySize;
+    }
+
+    public int getblockNumberOfRecordsBuffered() {
+        return m_blockNumberOfRecordsBuffered;
+    }
+
+    public int getblockNumberOfRecordDsiplayed() {
+        return m_blockNumberOfRecordDsiplayed;
+    }
+
+    public String getblockQueryAllRecord() {
+        return m_blockQueryAllRecord;
+    }
+
+    public String getblockRecordOrientation() {
+        return m_blockRecordOrientation;
+    }
+
+    public String getblockSingleRecord() {
+        return m_blockSingleRecord;
+    }
+
+    public String getblockDatabaseDataBlock() {
+        return m_blockDatabaseDataBlock;
+    }
+
+    public String getblockEnforcePrimaryKey() {
+        return m_blockEnforcePrimaryKey;
+    }
+
+    public String getblockQueryAllowed() {
+        return m_blockQueryAllowed;
+    }
+
+    public String getblockQueryDataSourceType() {
+        return m_blockQueryDataSourceType;
+    }
+
+    public String getblockQueryDataSourceName() {
+        return m_blockQueryDataSourceName;
+    }
+
+    public String getblockQueryDataSourceColumns() {
+        return m_blockQueryDataSourceColumns;
+    }
+
+    public String getblockQueryDataSourceArguments() {
+        return m_blockQueryDataSourceArguments;
+    }
+
+    public String getblockAlias() {
+        return m_blockAlias;
+    }
+
+    public String getblockIncludeRefItem() {
+        return m_blockIncludeRefItem;
+    }
+
+    public String getblockWhereClause() {
+        return m_blockWhereClause;
+    }
+
+    public String getblockOrderByClause() {
+        return m_blockOrderByClause;
+    }
+
+    public String getblockOptimizerHint() {
+        return m_blockOptimizerHint;
+    }
+
+    public String getblockInsertAllowed() {
+        return m_blockInsertAllowed;
+    }
+
+    public String getblockUpdateAllowed() {
+        return m_blockUpdateAllowed;
+    }
+
+    public String getblockLockingMode() {
+        return m_blockLockingMode;
+    }
+
+    public String getblockDeleteAllowed() {
+        return m_blockDeleteAllowed;
+    }
+
+    public String getblockKeyMode() {
+        return m_blockKeyMode;
+    }
+
+    public String getblockUpdateChangedColumnsOnly() {
+        return m_blockUpdateChangedColumnsOnly;
+    }
+
+    public String getblockEnforceColumnSecurity() {
+        return m_blockEnforceColumnSecurity;
+    }
+
+    public String getblockMaximumQueryTime() {
+        return m_blockMaximumQueryTime;
+    }
+
+    public String getblockMaximumRecordsFetched() {
+        return m_blockMaximumRecordsFetched;
+    }
+
+    public String getblockDMLDataTargetType() {
+        return m_blockDMLDataTargetType;
+    }
+
+    public String getblockDMLDataTargetname() {
+        return m_blockDMLDataTargetname;
+    }
+
+    public String getblockInsertProcedureName() {
+        return m_blockInsertProcedureName;
+    }
+
+    public String getblockInsertProcedureResultSetColumns() {
+        return m_blockInsertProcedureResultSetColumns;
+    }
+
+    public String getblockInsertProcedureArguments() {
+        return m_blockInsertProcedureArguments;
+    }
+
+    public String getblockUpdateProcedureName() {
+        return m_blockUpdateProcedureName;
+    }
+
+    public String getblockUpdateProcedureResultSetColumns() {
+        return m_blockUpdateProcedureResultSetColumns;
+    }
+
+    public String getblockUpdateProcedureArguments() {
+        return m_blockUpdateProcedureArguments;
+    }
+
+    public String getblockDeleteProcedureName() {
+        return m_blockDeleteProcedureName;
+    }
+
+    public String getblockDeleteProcedureResultSetColumns() {
+        return m_blockDeleteProcedureResultSetColumns;
+    }
+
+    public String getblockDeleteProcedureArguments() {
+        return m_blockDeleteProcedureArguments;
+    }
+
+    public String getblockLockProcedureName() {
+        return m_blockLockProcedureName;
+    }
+
+    public String getblockLockProcedureResultSetColumns() {
+        return m_blockLockProcedureResultSetColumns;
+    }
+
+    public String getblockLockProcedureArguments() {
+        return m_blockLockProcedureArguments;
+    }
+
+    public int getblockDMLArraySize() {
+        return m_blockDMLArraySize;
+    }
+
+    public String getblockPrecomputeSummaries() {
+        return m_blockPrecomputeSummaries;
+    }
+
+    public String getblockDMLReturningValue() {
+        return m_blockDMLReturningValue;
+    }
+
+    public ArrayList<oracleItem> getListItem() {
+        return m_ListItem;
+    }
+
+    public ArrayList<PlSqlMethod> getListMethod() {
+        return m_ListMethod;
+    }
+
+    public ArrayList<oracleRadioGroup> getlistRadioGroup() {
+        return m_listRadioGroup;
     }
     
 }

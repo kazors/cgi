@@ -14,7 +14,7 @@ import java.util.ArrayList;
  *
  * @author gerardj
  */
-public class oracleItem {
+public class oracleItem  {
 
     ////////////////////////////////////////////////////////////////////////////
     // Generale
