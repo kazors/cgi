@@ -112,7 +112,8 @@ public class OracleBuilderParser {
                 case "Error" :
                     System.out.println("Erreur lors du parsage du fichier");
                     
-            }System.out.println("m_current = "+m_currentState);}while(!(m_currentState=="error"));
+            }System.out.println("m_current = "+m_currentState);
+                System.out.println("nom du dernier item = "+v_listObject.get(v_listObject.size()-1).getobjectName());}while(!(m_currentState=="error"));
             
             
             
@@ -462,8 +463,12 @@ public class OracleBuilderParser {
                 
             }break;
             case "Radio Group" :
-                nextLine(17, p_fileAccess);
+                
+                nextLine(18, p_fileAccess);
+                
                 if(p_fileAccess.readLine().trim().startsWith("* Item Type")){
+                    p_fileAccess.seek(v_currentPos);
+                    nextLine(17, p_fileAccess);
                     return "Item";
                 }
                 break;
