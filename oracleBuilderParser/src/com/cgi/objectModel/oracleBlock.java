@@ -72,6 +72,7 @@ public class oracleBlock {
     ArrayList<oracleItem>  m_ListItem;
     ArrayList<PlSqlMethod> m_ListMethod;
     ArrayList<oracleRadioGroup> m_listRadioGroup;
+    ArrayList<oraclePushButton> m_listPushButton;
 
     public oracleBlock(String p_blockName, String p_blockSubclassInformation, String p_blockNavigationStyle,
                        String p_blockPreviousNavigationDataBlock, String p_blockNextNavigationDataBlock,
@@ -94,7 +95,7 @@ public class oracleBlock {
                        String p_blockLockProcedureName, String p_blockLockProcedureResultSetColumns,
                        String p_blockLockProcedureArguments, int p_blockDMLArraySize,
                        String p_blockPrecomputeSummaries, String p_blockDMLReturningValue,
-                       ArrayList<oracleItem> p_ListItem, ArrayList<PlSqlMethod> p_ListMethod, ArrayList<oracleRadioGroup> p_listRadioGroup) {
+                       ArrayList<oracleItem> p_ListItem, ArrayList<PlSqlMethod> p_ListMethod, ArrayList<oracleRadioGroup> p_listRadioGroup, ArrayList<oraclePushButton> p_listPushButton) {
         this.m_blockName                            = p_blockName;
         this.m_blockSubclassInformation             = p_blockSubclassInformation;
         this.m_blockNavigationStyle                 = p_blockNavigationStyle;
@@ -147,6 +148,7 @@ public class oracleBlock {
         this.m_ListItem                             = p_ListItem;
         this.m_ListMethod                           = p_ListMethod;
         this.m_listRadioGroup                       = p_listRadioGroup;
+        this.m_listPushButton                       = p_listPushButton;
     }
     private void AddMethod(PlSqlMethod p_method){
         m_ListMethod.add(p_method);
