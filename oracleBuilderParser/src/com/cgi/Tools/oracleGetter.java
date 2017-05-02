@@ -482,8 +482,9 @@ public class oracleGetter {
 
         try {
             String v_objectName     = Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+            
             String v_objectItemType = Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
-
+            
             Navigate.nextLine(19, p_fileAccess);
 
             String v_objectComments = p_fileAccess.readLine();
@@ -599,9 +600,10 @@ public class oracleGetter {
             String v_objectFontWeight  = Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
             String v_objectFontStyle   = Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
             String v_objectFontSpacing = Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+            Navigate.nextLine(16, p_fileAccess);
+            
             String v_objectHint        =
-                Refactoring.delSpace(Refactoring.getValueFromLine(Navigate.avancerJusqua(p_fileAccess,
-                    p_fileAccess.getFilePointer(), "* Hint")));
+                Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
             String v_objectDisplayHintAutomatically =
                 Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
             String v_objectTooltip = Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
@@ -633,10 +635,14 @@ public class oracleGetter {
         oraclePushButton v_pushButton=null;
         try {
             String v_oraclePushButtonName=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+            
+            
             String v_oraclePushButtonItemType=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+            
             String v_oraclePushButtonComments=Refactoring.delSpace(Refactoring.getValueFromLine(Navigate.avancerJusqua(p_fileAccess, p_fileAccess.getFilePointer(), "- Comments")));
             Navigate.nextLine(1, p_fileAccess);
             String v_oraclePushButtonEnabled=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+            System.out.println("le nom du push button est : "+v_oraclePushButtonEnabled);
             String v_oraclePushButtonLabel=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
             String m_oraclePushButtonAccessKey=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
             Navigate.nextLine(1, p_fileAccess);

@@ -57,8 +57,9 @@ public class OracleBuilderParser {
                 v_fileWriter.write("Il accepte des donnée de type "+v.getobjectDataType()+"\n sa position en x est "+v.getobjectPositionX());
                 v_fileWriter.write("et sa position en y "+v.getobjectPositionY()+"\n");
                 v_fileWriter.write("il y a "+v.getlistMethod().size()+" methode pl sql associé \n");
-               
+                    
                 }v_fileWriter.write("il y a "+e.getlistRadioGroup().get(0).getListButton().size());}
+            
         } catch (IOException ex) {
             Logger.getLogger(OracleBuilderParser.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
@@ -95,39 +96,50 @@ public class OracleBuilderParser {
             
             do{switch(m_currentState){
                 case "Block":
+                    System.out.println("je lit un block");
                     v_listBlock.add(oracleGetter.getBlock(v_fileAccess));
+                    System.out.println("j'ai ajouter un block du nom de "+v_listBlock.get(v_listBlock.size()-1).getblockName());
                     break;
                 case "Item" :
+                    System.out.println("je lit un text item");
                     v_listObject.add(oracleGetter.getItem(v_fileAccess));
                     
                     
                      
                     
                     m_currentState=oracleChecker.checkWhatsNext(v_fileAccess, m_currentState);
+                    System.out.println("j'ai ajouter un text item du nom de "+v_listObject.get(v_listObject.size()-1).getobjectName());
                     break;
                 case "Method" :
+                        System.out.println("je lit une methode");
                     v_listObject.get(v_listObject.size()-1).addMethod(oracleGetter.getMethod(v_fileAccess));
                     
                     m_currentState=oracleChecker.checkWhatsNext(v_fileAccess, m_currentState);
+                    System.out.println("j'ai ajouter une method  ");
                     break;
                 case "Radio Group" :
+                    System.out.println("j'ajoute un radio group");
                     v_listRadioGroup.add(oracleGetter.getRadioGroup(v_fileAccess));
                     m_currentState=oracleChecker.checkWhatsNext(v_fileAccess, m_currentState);
+                    System.out.println("j'ai ajouter un radio group du nom de "+v_listRadioGroup.get(v_listRadioGroup.size()-1).getoracleRadioGroupName());
                     break;
+                    
                 case "Push Button" :
+                    System.out.println("j'ajoute un push button");
                     v_listPushButton.add(oracleGetter.getPushButton(v_fileAccess));
                     m_currentState=oracleChecker.checkWhatsNext(v_fileAccess, m_currentState);
+                    System.out.println("j'ai ajouter un push button du nom de "+v_listPushButton.get(v_listPushButton.size()-1).getoraclePushButtonName());
+                    break;
                 case "Error" :
+                    System.out.println("j'ai une erreur");
                     System.out.println("Erreur lors du parsage du fichier");
                     
             }System.out.println("m_current = "+m_currentState);
-                System.out.println("nom du dernier item = "+v_listObject.get(v_listObject.size()-1).getobjectName());}while(!(m_currentState=="error"));
+                }while(!(m_currentState=="error"));
             
             
             
-            for(oracleItem o : v_listObject){
-                System.out.println(o.getobjectItemType());
-            }
+            
         } catch (FileNotFoundException ex) {
             Logger.getLogger(OracleBuilderParser.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {

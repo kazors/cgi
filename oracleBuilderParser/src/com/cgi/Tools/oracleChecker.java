@@ -18,8 +18,8 @@ import java.util.logging.Logger;
 public class oracleChecker {
     public static boolean NextIsARadioButton(RandomAccessFile p_fileAccess,long p_position){
         try {
-            Navigate.nextLine(21, p_fileAccess);
-            System.out.println("674 :"+p_fileAccess.readLine().trim());
+            Navigate.nextLine(22, p_fileAccess);
+            
             Boolean v_radioButton=p_fileAccess.readLine().trim().startsWith("* Radio Button Value");
             p_fileAccess.seek(p_position);
             if(v_radioButton){
@@ -50,10 +50,10 @@ public class oracleChecker {
                 }
                 break;    
             case "Method" :
-                Navigate.nextLine(9, p_fileAccess);
+                Navigate.nextLine(10, p_fileAccess);
                 
                 if((Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine().trim()))).startsWith("PL/SQL")){
-                    System.out.println("lololo");
+                    
                     p_fileAccess.seek(v_currentPos);
                     Navigate.avancerJusqua(p_fileAccess,p_fileAccess.getFilePointer(), "----------");
                     
@@ -62,22 +62,26 @@ public class oracleChecker {
                 }
                 p_fileAccess.seek(v_currentPos);
                 Navigate.nextLine(9, p_fileAccess);
-                
-                if((p_fileAccess.readLine().trim().startsWith("* Item Type"))||(p_fileAccess.readLine().trim().startsWith("^ Item Type"))){
+                String v_line=p_fileAccess.readLine().trim();
+                 System.out.println("v_line dans le checker : "+v_line);
+                if((v_line.startsWith("* Item Type"))||(v_line.startsWith("^ Item Type"))){
                     p_fileAccess.seek(v_currentPos);
-                    Navigate.nextLine(7, p_fileAccess);
-                    
-                    if((Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine())).equals("Radio Group"))){
+                    Navigate.nextLine(9, p_fileAccess);
+                    v_line=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+                   
+                    if((v_line.startsWith("Radio Group"))){
                         p_fileAccess.seek(v_currentPos);
                         Navigate.nextLine(6, p_fileAccess);
                         return "Radio Group";
-                    }else if((Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine())).equals("Push Button"))){
+                    }else if((v_line).startsWith("Push Button")){
+                        System.out.println("PUSH BUTTON");
                         p_fileAccess.seek(v_currentPos);
-                        Navigate.nextLine(6, p_fileAccess);
+                        Navigate.nextLine(8, p_fileAccess);
                         return "Push Button";
                     }
                     p_fileAccess.seek(v_currentPos);
-                    Navigate.nextLine(6, p_fileAccess);
+                    Navigate.nextLine(8, p_fileAccess);
+                    
                     return "Item";
                     
                 }
@@ -102,30 +106,35 @@ public class oracleChecker {
                 }
                 break;
             case "Item" :
-                Navigate.nextLine(8, p_fileAccess);
-                System.out.println("106 :"+p_fileAccess.readLine());
-                
+                Navigate.nextLine(6, p_fileAccess);
+                System.out.println("je veux lire ça : "+p_fileAccess.readLine());
+                p_fileAccess.seek(v_currentPos);
+                Navigate.nextLine(9, p_fileAccess);
                 
                 if((Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine().trim())).equals("PL/SQL"))){
-                    
+                    System.out.println("la");
                     p_fileAccess.seek(v_currentPos);
                     Navigate.nextLine(6, p_fileAccess);
                     
                     return "Method";
                 }
+                
+                
                 p_fileAccess.seek(v_currentPos);
                 Navigate.nextLine(7, p_fileAccess);
-                
-                
-                
-                if((p_fileAccess.readLine().trim().startsWith("* Item Type"))||(p_fileAccess.readLine().trim().startsWith("^ Item Type"))){
+                 v_line=p_fileAccess.readLine().trim();
+                System.out.println("v_line 123"+v_line);
+                if((v_line.startsWith("* Item Type"))||(v_line.startsWith("^ Item Type"))){
+                    System.out.println(" TU RENTRE LA?");
                     p_fileAccess.seek(v_currentPos);
-                    Navigate.nextLine(6, p_fileAccess);
-                    System.out.println("439 :"+p_fileAccess.readLine());
+                    Navigate.nextLine(7, p_fileAccess);
                     
-                    if((Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine())).equals("Radio Group"))){
+                    
+                    
+                    if((Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine().trim())).startsWith("Radio Group"))){
                         p_fileAccess.seek(v_currentPos);
                         Navigate.nextLine(6, p_fileAccess);
+                        
                         return "Radio Group";
                     }else if((Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine())).equals("Push Button"))){
                         p_fileAccess.seek(v_currentPos);
@@ -133,8 +142,8 @@ public class oracleChecker {
                         return "Push Button";
                     }
                     p_fileAccess.seek(v_currentPos);
-                    Navigate.nextLine(5, p_fileAccess);
-                    System.out.println("136 :"+p_fileAccess.readLine());
+                    Navigate.nextLine(6, p_fileAccess);
+                    
                     
                     return "Item";
                     
@@ -145,11 +154,11 @@ public class oracleChecker {
                  Navigate.nextLine(8, p_fileAccess);
                 
                  
-                
-                if((p_fileAccess.readLine().trim().startsWith("* Item Type"))||(p_fileAccess.readLine().trim().startsWith("^ Item Type"))){
+                v_line=p_fileAccess.readLine().trim();
+                if((v_line.startsWith("* Item Type"))||(v_line.startsWith("^ Item Type"))){
                     p_fileAccess.seek(v_currentPos);
-                    Navigate.nextLine(6, p_fileAccess);
-                    System.out.println("439 :"+p_fileAccess.readLine());
+                    Navigate.nextLine(7, p_fileAccess);
+                    
                     
                     if((Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine())).equals("Radio Group"))){
                         p_fileAccess.seek(v_currentPos);
@@ -165,13 +174,13 @@ public class oracleChecker {
                     return "Item";
             }
                 p_fileAccess.seek(v_currentPos);
-                 Navigate.nextLine(9, p_fileAccess);
+                 Navigate.nextLine(5, p_fileAccess);
                 
                 
                 if((Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine().trim())).equals("PL/SQL"))){
                     
                     p_fileAccess.seek(v_currentPos);
-                    Navigate.nextLine(6, p_fileAccess);
+                    Navigate.nextLine(2, p_fileAccess);
                     
                     return "Method";
                 }

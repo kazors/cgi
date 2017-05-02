@@ -1,9 +1,9 @@
-Il y a 5 item  dans ce fichier 
+Il y a 10 item  dans ce fichier 
 L'item CD est un objet de type Text Item
 Il accepte des donnée de type Char
  sa position en x est 2.928et sa position en y .201
 il y a 1 methode pl sql associé 
-L'item  est un objet de type 
+L'item NOMC est un objet de type Text Item
 Il accepte des donnée de type Char
  sa position en x est 7.373et sa position en y .201
 il y a 0 methode pl sql associé 
@@ -15,7 +15,28 @@ L'item RAF_CD est un objet de type Text Item
 Il accepte des donnée de type Number
  sa position en x est 2.928et sa position en y 1.513
 il y a 1 methode pl sql associé 
-L'item  est un objet de type 
+L'item DSP_NOM est un objet de type Text Item
 Il accepte des donnée de type Char
  sa position en x est 4.554et sa position en y 1.513
 il y a 0 methode pl sql associé 
+L'item EOR_CD est un objet de type Text Item
+Il accepte des donnée de type Char
+ sa position en x est 2.928et sa position en y 2.925
+il y a 2 methode pl sql associé 
+L'item DSP_NOM4 est un objet de type Text Item
+Il accepte des donnée de type Char
+ sa position en x est 5.052et sa position en y 2.925
+il y a 0 methode pl sql associé 
+L'item DSP_TEO_CD est un objet de type Text Item
+Il accepte des donnée de type Char
+ sa position en x est 0et sa position en y 0
+il y a 0 methode pl sql associé 
+L'item PDT_CD est un objet de type Text Item
+Il accepte des donnée de type Number
+ sa position en x est 0et sa position en y 0
+il y a 1 methode pl sql associé 
+L'item DSP_NOM3 est un objet de type Text Item
+Il accepte des donnée de type Char
+ sa position en x est 2.928et sa position en y 3.581
+il y a 2 methode pl sql associé 
+il y a 3

@@ -96,6 +96,135 @@ public class oraclePushButton {
         this.m_oraclePushButtonDirection                = p_oraclePushButtonDirection;
         
     }
+
+    public String getoraclePushButtonName() {
+        return m_oraclePushButtonName;
+    }
+
+    public String getoraclePushButtonItemType() {
+        return m_oraclePushButtonItemType;
+    }
+
+    public String getoraclePushButtonComments() {
+        return m_oraclePushButtonComments;
+    }
+
+    public String getoraclePushButtonEnabled() {
+        return m_oraclePushButtonEnabled;
+    }
+
+    public String getoraclePushButtonLabel() {
+        return m_oraclePushButtonLabel;
+    }
+
+    public String getoraclePushButtonAccessKey() {
+        return m_oraclePushButtonAccessKey;
+    }
+
+    public String getoraclePushButtonIconic() {
+        return m_oraclePushButtonIconic;
+    }
+
+    public String getoraclePushButtonIconFilename() {
+        return m_oraclePushButtonIconFilename;
+    }
+
+    public String getoraclePushButtonDefaultButton() {
+        return m_oraclePushButtonDefaultButton;
+    }
+
+    public String getoraclePushButtonPopupMenu() {
+        return m_oraclePushButtonPopupMenu;
+    }
+
+    public String getoraclePushButtonKeyboardNavigable() {
+        return m_oraclePushButtonKeyboardNavigable;
+    }
+
+    public String getoraclePushButtonMouseNavigate() {
+        return m_oraclePushButtonMouseNavigate;
+    }
+
+    public String getoraclePushButtonPreviousNavigationItem() {
+        return m_oraclePushButtonPreviousNavigationItem;
+    }
+
+    public String getoraclePushButtonNextNavigationItem() {
+        return m_oraclePushButtonNextNavigationItem;
+    }
+
+    public String getoraclePushButtonNumberOfItemDisplayed() {
+        return m_oraclePushButtonNumberOfItemDisplayed;
+    }
+
+    public String getoraclePushButtonVisible() {
+        return m_oraclePushButtonVisible;
+    }
+
+    public String getoraclePushButtonXPosition() {
+        return m_oraclePushButtonXPosition;
+    }
+
+    public String getoraclePushButtonYPosition() {
+        return m_oraclePushButtonYPosition;
+    }
+
+    public String getoraclePushButtonWidth() {
+        return m_oraclePushButtonWidth;
+    }
+
+    public String getoraclePushButtonHeight() {
+        return m_oraclePushButtonHeight;
+    }
+
+    public String getoraclePushButtonForegroundColor() {
+        return m_oraclePushButtonForegroundColor;
+    }
+
+    public String getoraclePushButtonBackGroundColor() {
+        return m_oraclePushButtonBackGroundColor;
+    }
+
+    public String getoraclePushButtonFont() {
+        return m_oraclePushButtonFont;
+    }
+
+    public String getoraclePushButtonFontName() {
+        return m_oraclePushButtonFontName;
+    }
+
+    public String getoraclePushButtonFontSize() {
+        return m_oraclePushButtonFontSize;
+    }
+
+    public String getoraclePushButtonFontWeight() {
+        return m_oraclePushButtonFontWeight;
+    }
+
+    public String getoraclePushButtonFontStyle() {
+        return m_oraclePushButtonFontStyle;
+    }
+
+    public String getoraclePushButtonFontSpacing() {
+        return m_oraclePushButtonFontSpacing;
+    }
+
+    public String getoraclePushButtonHint() {
+        return m_oraclePushButtonHint;
+    }
+
+    public String getoraclePushButtonDisplayHintAutomatically() {
+        return m_oraclePushButtonDisplayHintAutomatically;
+    }
+
+    public String getoraclePushButtonTooltip() {
+        return m_oraclePushButtonTooltip;
+    }
+
+    public String getoraclePushButtonDirection() {
+        return m_oraclePushButtonDirection;
+    }
+    
 }
 
 
