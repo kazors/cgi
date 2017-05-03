@@ -57,9 +57,9 @@ public class OracleBuilderParser {
                 v_fileWriter.write("Il accepte des donnée de type "+v.getobjectDataType()+"\n sa position en x est "+v.getobjectPositionX());
                 v_fileWriter.write("et sa position en y "+v.getobjectPositionY()+"\n");
                 v_fileWriter.write("il y a "+v.getlistMethod().size()+" methode pl sql associé \n");
-                    
+                   
                 }v_fileWriter.write("il y a "+e.getlistRadioGroup().get(0).getListButton().size());}
-            
+           // System.out.println("info :"+v_blockList.get(0).getListItem().get(v_blockList.get(0).getListItem().size()-2).getobjectComments());
         } catch (IOException ex) {
             Logger.getLogger(OracleBuilderParser.class.getName()).log(Level.SEVERE, null, ex);
         } finally {

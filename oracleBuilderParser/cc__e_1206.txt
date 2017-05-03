@@ -13483,7 +13483,7 @@ ITEM NAME
 *******************************************************************
 
      - Help Book Topic                               
-     * Enabled                                       Yes
+     * Enabled                                       No
      * Label                                         
      - Access Key                                    
      ^ Implementation Class                          ares.oracle.forms.ui.Button

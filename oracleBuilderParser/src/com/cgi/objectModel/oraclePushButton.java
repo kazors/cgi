@@ -13,7 +13,7 @@ package com.cgi.objectModel;
 public class oraclePushButton {
     String m_oraclePushButtonName;
     String m_oraclePushButtonItemType;
-    String m_oraclePushButtonComments;
+    
     String m_oraclePushButtonEnabled;
     String m_oraclePushButtonLabel;
     String m_oraclePushButtonAccessKey;
@@ -46,7 +46,7 @@ public class oraclePushButton {
     
 
     public oraclePushButton(String p_oraclePushButtonName, String p_oraclePushButtonItemType,
-                            String p_oraclePushButtonComments, String p_oraclePushButtonEnabled,
+                             String p_oraclePushButtonEnabled,
                             String p_oraclePushButtonLabel, String p_oraclePushButtonAccessKey,
                             String p_oraclePushButtonIconic, String p_oraclePushButtonIconFilename,
                             String p_oraclePushButtonDefaultButton, String p_oraclePushButtonPopupMenu,
@@ -64,7 +64,7 @@ public class oraclePushButton {
                             String p_oraclePushButtonTooltip, String p_oraclePushButtonDirection) {
         this.m_oraclePushButtonName                     = p_oraclePushButtonName;
         this.m_oraclePushButtonItemType                 = p_oraclePushButtonItemType;
-        this.m_oraclePushButtonComments                 = p_oraclePushButtonComments;
+        
         this.m_oraclePushButtonEnabled                  = p_oraclePushButtonEnabled;
         this.m_oraclePushButtonLabel                    = p_oraclePushButtonLabel;
         this.m_oraclePushButtonAccessKey                = p_oraclePushButtonAccessKey;
@@ -105,9 +105,7 @@ public class oraclePushButton {
         return m_oraclePushButtonItemType;
     }
 
-    public String getoraclePushButtonComments() {
-        return m_oraclePushButtonComments;
-    }
+    
 
     public String getoraclePushButtonEnabled() {
         return m_oraclePushButtonEnabled;

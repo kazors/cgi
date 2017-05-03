@@ -20,7 +20,7 @@ public class oracleItem  {
     // Generale
     String m_objectName;
     String m_objectItemType;
-    String m_objectComments;
+    
 
     ////////////////////////////////////////////////////////////////////////////
     // Functionnal
@@ -106,7 +106,7 @@ public class oracleItem  {
     // PL/SQL
     ArrayList<PlSqlMethod> m_listMethod;
 
-    public oracleItem(String p_objectName, String p_objectItemType, String p_objectComments, String p_objectEnabled,
+    public oracleItem(String p_objectName, String p_objectItemType,  String p_objectEnabled,
                         String p_objectJustification, String p_objectMultiLine, String p_objectCaseRestriction,
                         String p_objectDataConceal, String p_objectKeyboardNavigable,
                         String p_objectPreviousNavigationItem, String p_objectNextNavigationItem,
@@ -127,7 +127,7 @@ public class oracleItem  {
                         String p_objectTooltip, ArrayList<PlSqlMethod> p_listMethod) {
         this.m_objectName                     = p_objectName;
         this.m_objectItemType                 = p_objectItemType;
-        this.m_objectComments                 = p_objectComments;
+        
         this.m_objectEnabled                  = p_objectEnabled;
         this.m_objectJustification            = p_objectJustification;
         this.m_objectMultiLine                = p_objectMultiLine;
@@ -193,9 +193,7 @@ public class oracleItem  {
         return m_objectItemType;
     }
 
-    public String getobjectComments() {
-        return m_objectComments;
-    }
+    
 
     public String getobjectEnabled() {
         return m_objectEnabled;

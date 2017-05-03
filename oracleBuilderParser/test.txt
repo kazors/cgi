@@ -1,4 +1,4 @@
-Il y a 10 item  dans ce fichier 
+Il y a 24 item  dans ce fichier 
 L'item CD est un objet de type Text Item
 Il accepte des donnée de type Char
  sa position en x est 2.928et sa position en y .201
@@ -39,4 +39,60 @@ L'item DSP_NOM3 est un objet de type Text Item
 Il accepte des donnée de type Char
  sa position en x est 2.928et sa position en y 3.581
 il y a 2 methode pl sql associé 
+L'item DSP_ACV_CD2 est un objet de type Text Item
+Il accepte des donnée de type Char
+ sa position en x est 0et sa position en y 0
+il y a 0 methode pl sql associé 
+L'item TMA_CD est un objet de type Text Item
+Il accepte des donnée de type Char
+ sa position en x est 2.928et sa position en y 4.237
+il y a 2 methode pl sql associé 
+L'item DSP_LIB3 est un objet de type Text Item
+Il accepte des donnée de type Char
+ sa position en x est 5.052et sa position en y 4.237
+il y a 0 methode pl sql associé 
+L'item TCB_CD est un objet de type Text Item
+Il accepte des donnée de type Char
+ sa position en x est 0et sa position en y 0
+il y a 1 methode pl sql associé 
+L'item DSP_LIB5 est un objet de type Text Item
+Il accepte des donnée de type Char
+ sa position en x est 2.928et sa position en y 4.893
+il y a 3 methode pl sql associé 
+L'item RCO_CD est un objet de type Text Item
+Il accepte des donnée de type Char
+ sa position en x est 2.928et sa position en y 5.549
+il y a 1 methode pl sql associé 
+L'item BON_CMD est un objet de type Text Item
+Il accepte des donnée de type Char
+ sa position en x est 2.928et sa position en y 6.205
+il y a 1 methode pl sql associé 
+L'item DSP_NOM2 est un objet de type Text Item
+Il accepte des donnée de type Char
+ sa position en x est 4.554et sa position en y 5.549
+il y a 1 methode pl sql associé 
+L'item PRE_CD est un objet de type Text Item
+Il accepte des donnée de type Char
+ sa position en x est 0et sa position en y 0
+il y a 1 methode pl sql associé 
+L'item DSP_ACV_CD est un objet de type Text Item
+Il accepte des donnée de type Char
+ sa position en x est 0et sa position en y 0
+il y a 0 methode pl sql associé 
+L'item DSP_LIB4 est un objet de type Text Item
+Il accepte des donnée de type Char
+ sa position en x est 2.928et sa position en y 6.914
+il y a 3 methode pl sql associé 
+L'item DSP_PRT_CD est un objet de type Text Item
+Il accepte des donnée de type Char
+ sa position en x est 0et sa position en y 0
+il y a 0 methode pl sql associé 
+L'item DT_CLOT est un objet de type Text Item
+Il accepte des donnée de type Date
+ sa position en x est 2.928et sa position en y 7.571
+il y a 0 methode pl sql associé 
+L'item DEST_INTERNE est un objet de type Check Box
+Il accepte des donnée de type Null
+ sa position en x est Hiddenet sa position en y Start
+il y a 0 methode pl sql associé 
 il y a 3

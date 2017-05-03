@@ -39,6 +39,7 @@ public class Navigate {
                
                 
                 v_value=(p_fileAccess.readLine()).trim();
+                
                 v_test=v_value.startsWith(p_regex);
                 
                 
