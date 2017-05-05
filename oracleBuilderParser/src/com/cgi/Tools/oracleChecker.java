@@ -18,12 +18,13 @@ import java.util.logging.Logger;
 public class oracleChecker {
     public static boolean NextIsARadioButton(RandomAccessFile p_fileAccess,long p_position){
         try {
-            Navigate.nextLine(22, p_fileAccess);
+            Navigate.nextLine(21, p_fileAccess);
             
             Boolean v_radioButton=p_fileAccess.readLine().trim().startsWith("* Radio Button Value");
             p_fileAccess.seek(p_position);
             if(v_radioButton){
-                Navigate.nextLine(12, p_fileAccess);
+                Navigate.nextLine(15, p_fileAccess);
+                
             }
             return v_radioButton;
         } catch (IOException ex) {
@@ -97,54 +98,66 @@ public class oracleChecker {
                     }}break;
             case "Radio Group" :
                 
-                Navigate.nextLine(18, p_fileAccess);
+                Navigate.nextLine(17, p_fileAccess);
                 
                 if(p_fileAccess.readLine().trim().startsWith("* Item Type")){
                     p_fileAccess.seek(v_currentPos);
-                    Navigate.nextLine(17, p_fileAccess);
+                    Navigate.nextLine(16, p_fileAccess);
+                    
                     return "Item";
+                }
+                p_fileAccess.seek(v_currentPos);
+                Navigate.nextLine(3, p_fileAccess);
+                if(Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine())).equals("PL/SQL")){
+                    p_fileAccess.seek(v_currentPos);
+                    Navigate.nextLine(1, p_fileAccess);
+                    return "Method";
                 }
                 break;
             case "Item" :
                 
                 
                 p_fileAccess.seek(v_currentPos);
-                Navigate.nextLine(8, p_fileAccess);
+                Navigate.nextLine(7, p_fileAccess);
                 System.out.println("p_fileAccess : "+p_fileAccess.readLine());
                 p_fileAccess.seek(v_currentPos);
-                Navigate.nextLine(9, p_fileAccess);
+                Navigate.nextLine(8, p_fileAccess);
                 if((Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine().trim())).equals("PL/SQL"))){
                     
                     p_fileAccess.seek(v_currentPos);
-                    Navigate.nextLine(6, p_fileAccess);
+                    Navigate.nextLine(5, p_fileAccess);
                     
                     return "Method";
                 }
                 
                 
                 p_fileAccess.seek(v_currentPos);
-                Navigate.nextLine(7, p_fileAccess);
+                Navigate.nextLine(6, p_fileAccess);
                  v_line=p_fileAccess.readLine().trim();
                 System.out.println("v_line : "+v_line);
                 if((v_line.startsWith("* Item Type"))||(v_line.startsWith("^ Item Type"))){
                     
                     p_fileAccess.seek(v_currentPos);
-                    Navigate.nextLine(7, p_fileAccess);
+                    Navigate.nextLine(6, p_fileAccess);
                     
                     
                     v_line=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine().trim()));
                     if(v_line.startsWith("Radio Group")){
                         p_fileAccess.seek(v_currentPos);
-                        Navigate.nextLine(6, p_fileAccess);
+                        Navigate.nextLine(5, p_fileAccess);
                         
                         return "Radio Group";
                     }else if(v_line.startsWith("Push Button")){
                         p_fileAccess.seek(v_currentPos);
-                        Navigate.nextLine(6, p_fileAccess);
+                        Navigate.nextLine(5, p_fileAccess);
                         return "Push Button";
+                    }else if(v_line.startsWith("Check Box")){
+                        p_fileAccess.seek(v_currentPos);
+                        Navigate.nextLine(5, p_fileAccess);
+                        return "Check Box";
                     }
                     p_fileAccess.seek(v_currentPos);
-                    Navigate.nextLine(6, p_fileAccess);
+                    Navigate.nextLine(5, p_fileAccess);
                     
                     
                     return "Item";
@@ -153,13 +166,12 @@ public class oracleChecker {
                 break;
                 
             case "Push Button" :
-                 Navigate.nextLine(3, p_fileAccess);
-                
-                p_fileAccess.seek(v_currentPos);
+                 
                 Navigate.nextLine(3, p_fileAccess);
                 
                  
                 v_line=p_fileAccess.readLine().trim();
+                
                 if((v_line.startsWith("* Item Type"))||(v_line.startsWith("^ Item Type"))){
                     p_fileAccess.seek(v_currentPos);
                     Navigate.nextLine(3, p_fileAccess);
@@ -174,6 +186,10 @@ public class oracleChecker {
                         p_fileAccess.seek(v_currentPos);
                         Navigate.nextLine(2, p_fileAccess);
                         return "Push Button";
+                    }else if(v_line.startsWith("Check Box")){
+                        p_fileAccess.seek(v_currentPos);
+                        Navigate.nextLine(6, p_fileAccess);
+                        return "Check Box";
                     }
                     p_fileAccess.seek(v_currentPos);
                     Navigate.nextLine(2, p_fileAccess);
@@ -181,7 +197,7 @@ public class oracleChecker {
             }
                 p_fileAccess.seek(v_currentPos);
                  Navigate.nextLine(5, p_fileAccess);
-                System.out.println("LAAAAAAAAAAAA : "+p_fileAccess.readLine());
+                
                 p_fileAccess.seek(v_currentPos);
                 Navigate.nextLine(5, p_fileAccess);
                 
@@ -192,7 +208,40 @@ public class oracleChecker {
                     
                     return "Method";
                 }
-
+                break;
+            case "Check Box" :
+                   Navigate.nextLine(5, p_fileAccess);
+                   
+                   v_line=p_fileAccess.readLine().trim();
+                   
+                   
+                if((v_line.startsWith("* Item Type"))||(v_line.startsWith("^ Item Type"))){
+                    p_fileAccess.seek(v_currentPos);
+                    
+                    Navigate.nextLine(5, p_fileAccess);
+                    
+                    String v_type=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+                    
+                    if(v_type.equals("Radio Group")){
+                        p_fileAccess.seek(v_currentPos);
+                        Navigate.nextLine(4, p_fileAccess);
+                        return "Radio Group";
+                    }else if(v_type.equals("Push Button")){
+                        p_fileAccess.seek(v_currentPos);
+                        Navigate.nextLine(4, p_fileAccess);
+                        return "Push Button";
+                    }else if(v_type.startsWith("Check Box")){
+                        
+                        p_fileAccess.seek(v_currentPos);
+                        Navigate.nextLine(4, p_fileAccess);
+                        
+                        return "Check Box";
+                    }
+                    p_fileAccess.seek(v_currentPos);
+                    Navigate.nextLine(4, p_fileAccess);
+                    return "Item";
+            }
+                break;
             }
         
 

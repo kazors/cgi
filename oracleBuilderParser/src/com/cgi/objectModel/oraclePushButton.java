@@ -6,6 +6,8 @@
  */
 package com.cgi.objectModel;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author moi
@@ -43,7 +45,7 @@ public class oraclePushButton {
     String m_oraclePushButtonDisplayHintAutomatically;
     String m_oraclePushButtonTooltip;
     String m_oraclePushButtonDirection;
-    
+    ArrayList<PlSqlMethod> m_listMethod;
 
     public oraclePushButton(String p_oraclePushButtonName, String p_oraclePushButtonItemType,
                              String p_oraclePushButtonEnabled,
@@ -61,7 +63,7 @@ public class oraclePushButton {
                             String p_oraclePushButtonFontSize, String p_oraclePushButtonFontWeight,
                             String p_oraclePushButtonFontStyle, String p_oraclePushButtonFontSpacing,
                             String p_oraclePushButtonHint, String p_oraclePushButtonDisplayHintAutomatically,
-                            String p_oraclePushButtonTooltip, String p_oraclePushButtonDirection) {
+                            String p_oraclePushButtonTooltip, String p_oraclePushButtonDirection, ArrayList<PlSqlMethod> p_listMethod) {
         this.m_oraclePushButtonName                     = p_oraclePushButtonName;
         this.m_oraclePushButtonItemType                 = p_oraclePushButtonItemType;
         
@@ -94,9 +96,14 @@ public class oraclePushButton {
         this.m_oraclePushButtonDisplayHintAutomatically = p_oraclePushButtonDisplayHintAutomatically;
         this.m_oraclePushButtonTooltip                  = p_oraclePushButtonTooltip;
         this.m_oraclePushButtonDirection                = p_oraclePushButtonDirection;
-        
+        this.m_listMethod                               = p_listMethod;
     }
 
+    public ArrayList<PlSqlMethod> getlistMethod() {
+        return m_listMethod;
+    }
+
+    
     public String getoraclePushButtonName() {
         return m_oraclePushButtonName;
     }

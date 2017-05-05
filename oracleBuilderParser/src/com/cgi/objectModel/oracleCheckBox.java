@@ -6,6 +6,8 @@
  */
 package com.cgi.objectModel;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author gerardj
@@ -60,7 +62,7 @@ public class oracleCheckBox {
     String m_oracleCheckBoxHint;
     String m_oracleCheckBoxDisplayHintAutomatically;
     String m_oracleCheckBoxTooltip;
-
+    ArrayList<PlSqlMethod> m_listMethod;
     public oracleCheckBox(String p_oracleCheckBoxName, String p_oracleCheckBoxItemType, String p_oracleCheckBoxEnabled,
                           String p_oracleCheckBoxLabel, String p_oracleCheckBoxAccessKey,
                           String p_oracleCheckBoxValueWhenChecked, String p_oracleCheckBoxValueWhenUnchecked,
@@ -84,7 +86,7 @@ public class oracleCheckBox {
                           String p_oracleCheckBoxFontName, String p_oracleCheckBoxFontSize,
                           String p_oracleCheckBoxFontWeight, String p_oracleCheckBoxFontStyle,
                           String p_oracleCheckBoxFontSpacing, String p_oracleCheckBoxHint,
-                          String p_oracleCheckBoxDisplayHintAutomatically, String p_oracleCheckBoxTooltip) {
+                          String p_oracleCheckBoxDisplayHintAutomatically, String p_oracleCheckBoxTooltip, ArrayList<PlSqlMethod> p_listMethod) {
         this.m_oracleCheckBoxName                         = p_oracleCheckBoxName;
         this.m_oracleCheckBoxItemType                     = p_oracleCheckBoxItemType;
         this.m_oracleCheckBoxEnabled                      = p_oracleCheckBoxEnabled;
@@ -134,11 +136,17 @@ public class oracleCheckBox {
         this.m_oracleCheckBoxHint                         = p_oracleCheckBoxHint;
         this.m_oracleCheckBoxDisplayHintAutomatically     = p_oracleCheckBoxDisplayHintAutomatically;
         this.m_oracleCheckBoxTooltip                      = p_oracleCheckBoxTooltip;
+        this.m_listMethod                                 = p_listMethod;
     }
 
     public String getoracleCheckBoxName() {
         return m_oracleCheckBoxName;
     }
+
+    public ArrayList<PlSqlMethod> getlistMethod() {
+        return m_listMethod;
+    }
+    
 
     public String getoracleCheckBoxItemType() {
         return m_oracleCheckBoxItemType;

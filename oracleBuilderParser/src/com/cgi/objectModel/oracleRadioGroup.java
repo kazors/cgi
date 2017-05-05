@@ -59,6 +59,7 @@ public class oracleRadioGroup  {
     String                       m_oracleRadioGroupDirection;
     String                       m_oracleRadioGroupTrigger;
     ArrayList<oracleRadioButton> m_ListButton;
+    ArrayList<PlSqlMethod> m_listMethod;
 
     public oracleRadioGroup(String p_oracleRadioGroupName, String p_oracleRadioGroupItemType,
                             String p_oracleRadioGroupAccessKey, String p_oracleRadioGroupMappingofOtherValues,
@@ -81,7 +82,7 @@ public class oracleRadioGroup  {
                             String p_oracleRadioGroupFontSpacing, String p_oracleRadioGroupHint,
                             String p_oracleRadioGroupDisplayHintAutomatically, String p_oracleRadioGroupTooltip,
                             String p_oracleRadioGroupDirection, String p_oracleRadioGroupTrigger,
-                            ArrayList<oracleRadioButton> p_ListButton) {
+                            ArrayList<oracleRadioButton> p_ListButton,ArrayList<PlSqlMethod> p_listMethod) {
         this.m_oracleRadioGroupName                     = p_oracleRadioGroupName;
         this.m_oracleRadioGroupItemType                 = p_oracleRadioGroupItemType;
         this.m_oracleRadioGroupAccessKey                = p_oracleRadioGroupAccessKey;
@@ -125,8 +126,13 @@ public class oracleRadioGroup  {
         this.m_oracleRadioGroupDirection                = p_oracleRadioGroupDirection;
         this.m_oracleRadioGroupTrigger                  = p_oracleRadioGroupTrigger;
         this.m_ListButton                               = p_ListButton;
+        this.m_listMethod                               = p_listMethod;
     }
 
+    public ArrayList<PlSqlMethod> getlistMethod() {
+        return m_listMethod;
+    }
+    
     public String getoracleRadioGroupName() {
         return m_oracleRadioGroupName;
     }

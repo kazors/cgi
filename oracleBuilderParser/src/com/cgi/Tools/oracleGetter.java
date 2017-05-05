@@ -87,8 +87,8 @@ public class oracleGetter {
 
         try {
             do {
-                Navigate.nextLine(4, p_fileAccess);
-
+                
+                System.out.println("RADIO BUTTOn");
                 String v_radioButtonName                =
                     Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
                 String v_radioButtonSubClassInformation =
@@ -137,7 +137,9 @@ public class oracleGetter {
                     Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
                 String v_radioButtonFontSpacing =
                     Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
-
+                Navigate.nextLine(1, p_fileAccess);
+                System.out.println("nom du radio ajouté : "+v_radioButtonName);
+                
                 v_listButton.add(new oracleRadioButton(v_radioButtonName, v_radioButtonSubClassInformation,
                         v_radioButtonComments, v_radioButtonEnabled, v_radioButtonLabel, v_radioButtonAccessKey,
                         v_radioButtonRadioButtonValue, v_radioButtonVisible, v_radioButtonXPosition,
@@ -166,6 +168,7 @@ public class oracleGetter {
                     p_fileAccess.getFilePointer(), "- Access Key")));
             String v_oracleRadioGroupMappingofOtherValue =
                 Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+            Navigate.nextLine(1, p_fileAccess);
             String v_oracleRadioGroupPopupMenu =
                 Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
             String v_oracleRadioGroupKeyboardNavigable =
@@ -178,6 +181,7 @@ public class oracleGetter {
                 Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
             String v_oracleRadioGroupDataType =
                 Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+            System.out.println("type data : "+v_oracleRadioGroupPopupMenu);
             String v_oracleRadioGroupDataLengthSemantics =
                 Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
             String v_oracleRadioGroupMaximumLength =
@@ -244,10 +248,30 @@ public class oracleGetter {
                 Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
             String v_oracleRadioGroupTooltip =
                 Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+            Navigate.nextLine(1, p_fileAccess);
             String v_oracleRadioGroupDirection =
                 Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
             String v_oracleRadioGroupTrigger =
                 Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+            
+            ArrayList<PlSqlMethod> v_listMethod=new ArrayList<>();
+            String v_currentState="Radio Group";
+            long v_currentPos=p_fileAccess.getFilePointer();
+            while((v_currentState=oracleChecker.checkWhatsNext(p_fileAccess, v_currentState)).equals("Method")){
+                
+                v_listMethod.add(getMethod(p_fileAccess));
+                v_currentPos=p_fileAccess.getFilePointer();
+            }
+            p_fileAccess.seek(v_currentPos);
+            
+            if(v_listMethod.size()==0){
+                
+               Navigate.nextLine(2, p_fileAccess);
+               
+                
+            }else{
+                Navigate.nextLine(9, p_fileAccess);
+            }
             ArrayList<oracleRadioButton> v_listButton = (getRadioButton(p_fileAccess));
 
             v_radioGroup = new oracleRadioGroup(v_oracleRadioGroupName, v_oracleRadioGroupItemType,
@@ -266,7 +290,7 @@ public class oracleGetter {
                     v_oracleRadioGroupFontName, v_oracleRadioGroupFontSize, v_oracleRadioGroupFontWeight,
                     v_oracleRadioGroupFontStyle, v_oracleRadioGroupFontSpacing, v_oracleRadioGroupHint,
                     v_oracleRadioGroupDisplayHintAutomatically, v_oracleRadioGroupTooltip, v_oracleRadioGroupDirection,
-                    v_oracleRadioGroupTrigger, v_listButton);
+                    v_oracleRadioGroupTrigger, v_listButton, new ArrayList<>());
         } catch (IOException ex) {
             Logger.getLogger(OracleBuilderParser.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -491,7 +515,7 @@ public class oracleGetter {
                                       v_blockLockProcedureName, v_blockLockProcedureResultSetColumns,
                                       v_blockLockProcedureArguments, v_blockDMLArraySize, v_blockPrecomputeSumarries,
                                       v_blockDMLReturningValues, new ArrayList<>(), new ArrayList<>(),
-                                      new ArrayList<>(),new ArrayList<>());
+                                      new ArrayList<>(),new ArrayList<>(),new ArrayList<>());
         } catch (IOException ex) {
             Logger.getLogger(OracleBuilderParser.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -604,8 +628,8 @@ public class oracleGetter {
             String v_objectWidth     = Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
             String v_objectHeight    = Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
             String v_objectBevel     = Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
-
-            Navigate.nextLine(3, p_fileAccess);
+            
+            Navigate.nextLine(4, p_fileAccess);
 
             String v_objectForeGroundColor =
                 Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
@@ -620,7 +644,8 @@ public class oracleGetter {
             String v_objectFontWeight  = Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
             String v_objectFontStyle   = Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
             String v_objectFontSpacing = Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
-            Navigate.nextLine(16, p_fileAccess);
+            String v_objectPrompt      =Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+            Navigate.nextLine(15, p_fileAccess);
             
             String v_objectHint        =
                 Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
@@ -642,7 +667,7 @@ public class oracleGetter {
                                     v_objectVisible, v_objectPositionX, v_objectPositionY, v_objectWidth,
                                     v_objectHeight, v_objectBevel, v_objectForeGroundColor, v_objectBackGroundColor,
                                     v_objectFillPattern, v_objectFontName, v_objectFontSize, v_objectFontWeight,
-                                    v_objectFontStyle, v_objectFontSpacing, v_objectHint,
+                                    v_objectFontStyle, v_objectFontSpacing,v_objectPrompt, v_objectHint,
                                     v_objectDisplayHintAutomatically, v_objectTooltip, new ArrayList<>());
         } catch (IOException ex) {
             Logger.getLogger(OracleBuilderParser.class.getName()).log(Level.SEVERE, null, ex);
@@ -652,126 +677,155 @@ public class oracleGetter {
     }
     
     public static oraclePushButton getPushButton(RandomAccessFile p_fileAccess){
-        oraclePushButton v_pushButton=null;
         try {
-            String v_oraclePushButtonName=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+            oraclePushButton v_pushButton=null;
+            try {
+                String v_oraclePushButtonName=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+                
+                
+                String v_oraclePushButtonItemType=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+                
+                Navigate.avancerJusqua(p_fileAccess, p_fileAccess.getFilePointer(), "- Help Book Topic");
+                
+                
+                String v_oraclePushButtonEnabled=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+                
+                String v_oraclePushButtonLabel=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+                
+                String m_oraclePushButtonAccessKey=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+                Navigate.nextLine(1, p_fileAccess);
+                ;
+                String v_oraclePushButtonIconic=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+                String v_oraclePushButtonIconFilename=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+                String v_oraclePushButtonDefaultButton=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+                String v_oraclePushButtonPopupMenu=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+                String v_oraclePushButtonKeyboardNavigable=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+                String v_oraclePushButtonMouseNavigate=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+                String v_oraclePushButtonPreviousNavigationItem=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+                String v_oraclePushButtonNextNavigationItem=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+                Navigate.nextLine(2, p_fileAccess);
+                String v_oraclePushButtonNumberOfItemDisplayed=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+                String v_oraclePushButtonVisible=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+                Navigate.nextLine(2, p_fileAccess);
+                String v_oraclePushButtonXPosition=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+                String v_oraclePushButtonYPosition=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+                String v_oraclePushButtonWidth=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+                String v_oraclePushButtonHeight=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+                Navigate.nextLine(2, p_fileAccess);
+                String v_oraclePushButtonForegroundColor=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+                String v_oraclePushButtonBackGroundColor=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+                Navigate.nextLine(1, p_fileAccess);
+                String v_oraclePushButtonFont=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+                String v_oraclePushButtonFontName=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+                String v_oraclePushButtonFontSize=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+                String v_oraclePushButtonFontWeight=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+                String v_oraclePushButtonFontStyle=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+                String v_oraclePushButtonFontSpacing=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+                Navigate.nextLine(15, p_fileAccess);
+                String v_oraclePushButtonHint=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+                String v_oraclePushButtonDisplayHintAutomatically=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+                String v_oraclePushButtonTooltip=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+                Navigate.nextLine(1, p_fileAccess);
+                String v_oraclePushButtonDirection=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+                
+                v_pushButton=new oraclePushButton(v_oraclePushButtonName, v_oraclePushButtonItemType,  v_oraclePushButtonEnabled, v_oraclePushButtonLabel, m_oraclePushButtonAccessKey, v_oraclePushButtonIconic, v_oraclePushButtonIconFilename, v_oraclePushButtonDefaultButton, v_oraclePushButtonPopupMenu, v_oraclePushButtonKeyboardNavigable, v_oraclePushButtonMouseNavigate, v_oraclePushButtonPreviousNavigationItem, v_oraclePushButtonNextNavigationItem, v_oraclePushButtonNumberOfItemDisplayed, v_oraclePushButtonVisible, v_oraclePushButtonXPosition, v_oraclePushButtonYPosition, v_oraclePushButtonWidth, v_oraclePushButtonHeight, v_oraclePushButtonForegroundColor, v_oraclePushButtonBackGroundColor, v_oraclePushButtonFont, v_oraclePushButtonFontName, v_oraclePushButtonFontSize, v_oraclePushButtonFontWeight, v_oraclePushButtonFontStyle, v_oraclePushButtonFontSpacing, v_oraclePushButtonHint, v_oraclePushButtonDisplayHintAutomatically, v_oraclePushButtonTooltip, v_oraclePushButtonDirection, new ArrayList<>());
+            } catch (IOException ex) {
+                Logger.getLogger(oracleGetter.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            long v_currentPos=p_fileAccess.getFilePointer();
+            String v_currentState="Push Button";
+            while((v_currentState=oracleChecker.checkWhatsNext(p_fileAccess, v_currentState)).equals("Method")){
+                v_pushButton.getlistMethod().add(getMethod(p_fileAccess));
+                v_currentPos=p_fileAccess.getFilePointer();
+            }
+                
+                p_fileAccess.seek(v_currentPos);
+                
             
-            
-            String v_oraclePushButtonItemType=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
-            
-            Navigate.avancerJusqua(p_fileAccess, p_fileAccess.getFilePointer(), "- Help Book Topic");
-            
-            
-            String v_oraclePushButtonEnabled=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
-            
-            String v_oraclePushButtonLabel=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
-            String m_oraclePushButtonAccessKey=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
-            Navigate.nextLine(1, p_fileAccess);
-            ;
-            String v_oraclePushButtonIconic=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
-    String v_oraclePushButtonIconFilename=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
-    String v_oraclePushButtonDefaultButton=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
-    String v_oraclePushButtonPopupMenu=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
-    String v_oraclePushButtonKeyboardNavigable=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
-    String v_oraclePushButtonMouseNavigate=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
-    String v_oraclePushButtonPreviousNavigationItem=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
-    String v_oraclePushButtonNextNavigationItem=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
-            Navigate.nextLine(2, p_fileAccess);
-    String v_oraclePushButtonNumberOfItemDisplayed=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
-    String v_oraclePushButtonVisible=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
-    Navigate.nextLine(2, p_fileAccess);
-    String v_oraclePushButtonXPosition=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
-    String v_oraclePushButtonYPosition=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
-    String v_oraclePushButtonWidth=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
-    String v_oraclePushButtonHeight=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
-    Navigate.nextLine(2, p_fileAccess);
-    String v_oraclePushButtonForegroundColor=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
-    String v_oraclePushButtonBackGroundColor=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
-            Navigate.nextLine(1, p_fileAccess);
-    String v_oraclePushButtonFont=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
-    String v_oraclePushButtonFontName=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
-    String v_oraclePushButtonFontSize=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
-    String v_oraclePushButtonFontWeight=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
-    String v_oraclePushButtonFontStyle=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
-    String v_oraclePushButtonFontSpacing=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
-    Navigate.nextLine(15, p_fileAccess);
-    String v_oraclePushButtonHint=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
-    String v_oraclePushButtonDisplayHintAutomatically=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
-    String v_oraclePushButtonTooltip=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
-    Navigate.nextLine(1, p_fileAccess);
-    String v_oraclePushButtonDirection=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
-            
-    v_pushButton=new oraclePushButton(v_oraclePushButtonName, v_oraclePushButtonItemType,  v_oraclePushButtonEnabled, v_oraclePushButtonLabel, m_oraclePushButtonAccessKey, v_oraclePushButtonIconic, v_oraclePushButtonIconFilename, v_oraclePushButtonDefaultButton, v_oraclePushButtonPopupMenu, v_oraclePushButtonKeyboardNavigable, v_oraclePushButtonMouseNavigate, v_oraclePushButtonPreviousNavigationItem, v_oraclePushButtonNextNavigationItem, v_oraclePushButtonNumberOfItemDisplayed, v_oraclePushButtonVisible, v_oraclePushButtonXPosition, v_oraclePushButtonYPosition, v_oraclePushButtonWidth, v_oraclePushButtonHeight, v_oraclePushButtonForegroundColor, v_oraclePushButtonBackGroundColor, v_oraclePushButtonFont, v_oraclePushButtonFontName, v_oraclePushButtonFontSize, v_oraclePushButtonFontWeight, v_oraclePushButtonFontStyle, v_oraclePushButtonFontSpacing, v_oraclePushButtonHint, v_oraclePushButtonDisplayHintAutomatically, v_oraclePushButtonTooltip, v_oraclePushButtonDirection);
+            return v_pushButton;
         } catch (IOException ex) {
             Logger.getLogger(oracleGetter.class.getName()).log(Level.SEVERE, null, ex);
         }
-    return v_pushButton;
+        return null;
     }
     
     public static oracleCheckBox getCheckBox(RandomAccessFile p_fileAccess){
-        oracleCheckBox v_checkBox= null;
         try {
-            String v_oracleCheckBoxName=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
-            String v_oracleCheckBoxItemType=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
-            String v_oracleCheckBoxEnabled=Refactoring.delSpace(Refactoring.getValueFromLine(Navigate.avancerJusqua(p_fileAccess, p_fileAccess.getFilePointer(), "* Enabled")));
-            String v_oracleCheckBoxLabel=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
-            String v_oracleCheckBoxAccessKey=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
-            Navigate.nextLine(1, p_fileAccess);
-            String v_oracleCheckBoxValueWhenChecked=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
-            String v_oracleCheckBoxValueWhenUnchecked=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
-            String v_oracleCheckBoxCheckBoxMappingofOtherValues=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
-            String v_oracleCheckBoxPopupMenu=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
-            String v_oracleCheckBoxKeyboardNavigable=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
-            String v_oracleCheckBoxMouseNavigate=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
-            String v_oracleCheckBoxPreviousNavigationItem=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
-            String v_oracleCheckBoxNextNavigationItem=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
-            String v_oracleCheckBoxDataType=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
-            String v_oracleCheckBoxDataLengthSemantics=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
-            String v_oracleCheckBoxMaximumLength=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
-            String v_oracleCheckBoxInitialValue=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
-            String v_oracleCheckBoxCopyValueFromItem=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
-            String v_oracleCheckBoxSynchronizeWithItem=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
-            String v_oracleCheckBoxCalculationMode=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
-            String v_oracleCheckBoxFormula=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
-            String v_oracleCheckBoxSummaryFunction=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
-            String v_oracleCheckBoxSummarizedBlock=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
-            String v_oracleCheckBoxSummarizedItem=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
-            String v_oracleCheckBoxNumberofItemDisplayed=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
-            Navigate.nextLine(3, p_fileAccess);
-            String v_oracleCheckBoxDatabaseItem=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
-            String v_oracleCheckBoxColumnName=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
-            String v_oracleCheckBoxPrimaryKey=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
-            String v_oracleCheckBoxQueyrOnly=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
-            String v_oracleCheckBoxQueryAllowed=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
-            String v_oracleCheckBoxInsertAllowed=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
-            String v_oracleCheckBoxUpdateAllowed=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
-            String v_oracleCheckBoxVisible=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
-            Navigate.nextLine(1, p_fileAccess);
-            String v_oracleCheckBoxTabPage=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
-            String v_oracleCheckBoxXPosition=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
-            String v_oracleCheckBoxYPosition=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
-            String v_oracleCheckBoxWidth=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
-            String v_oracleCheckBoxHeight=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
-            Navigate.nextLine(2, p_fileAccess);
-            String v_oracleCheckBoxForegroundColor=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
-            String v_oracleCheckBoxBackGroundColor=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
-            Navigate.nextLine(1, p_fileAccess);
-            String v_oracleCheckBoxFont=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
-            String v_oracleCheckBoxFontName=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
-            String v_oracleCheckBoxFontSize=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
-            String v_oracleCheckBoxFontWeight=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
-            String v_oracleCheckBoxFontStyle=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
-            String v_oracleCheckBoxFontSpacing=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
-            String v_oracleCheckBoxHint=Refactoring.delSpace(Refactoring.getValueFromLine(Navigate.avancerJusqua(p_fileAccess, p_fileAccess.getFilePointer(), "* Hint")));
-            String v_oracleCheckBoxDisplayHintAutomatically=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
-            String v_oracleCheckBoxTooltip=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
-            v_checkBox=new oracleCheckBox(v_oracleCheckBoxName, v_oracleCheckBoxItemType, v_oracleCheckBoxEnabled, v_oracleCheckBoxLabel, v_oracleCheckBoxAccessKey, v_oracleCheckBoxValueWhenChecked, v_oracleCheckBoxValueWhenUnchecked, v_oracleCheckBoxCheckBoxMappingofOtherValues, v_oracleCheckBoxPopupMenu, v_oracleCheckBoxKeyboardNavigable, v_oracleCheckBoxMouseNavigate, v_oracleCheckBoxPreviousNavigationItem, v_oracleCheckBoxNextNavigationItem, v_oracleCheckBoxDataType, v_oracleCheckBoxDataLengthSemantics, v_oracleCheckBoxMaximumLength, v_oracleCheckBoxInitialValue, v_oracleCheckBoxCopyValueFromItem, v_oracleCheckBoxSynchronizeWithItem, v_oracleCheckBoxCalculationMode, v_oracleCheckBoxFormula, v_oracleCheckBoxSummaryFunction, v_oracleCheckBoxSummarizedBlock, v_oracleCheckBoxSummarizedItem, v_oracleCheckBoxNumberofItemDisplayed, v_oracleCheckBoxDatabaseItem, v_oracleCheckBoxColumnName, v_oracleCheckBoxPrimaryKey, v_oracleCheckBoxQueyrOnly, v_oracleCheckBoxQueryAllowed, v_oracleCheckBoxInsertAllowed, v_oracleCheckBoxUpdateAllowed, v_oracleCheckBoxVisible, v_oracleCheckBoxTabPage, v_oracleCheckBoxXPosition, v_oracleCheckBoxYPosition, v_oracleCheckBoxWidth, v_oracleCheckBoxHeight, v_oracleCheckBoxForegroundColor, v_oracleCheckBoxBackGroundColor, v_oracleCheckBoxFont, v_oracleCheckBoxFontName, v_oracleCheckBoxFontSize, v_oracleCheckBoxFontWeight, v_oracleCheckBoxFontStyle, v_oracleCheckBoxFontSpacing, v_oracleCheckBoxHint, v_oracleCheckBoxDisplayHintAutomatically, v_oracleCheckBoxTooltip);
+            oracleCheckBox v_checkBox= null;
+            try {
+                String v_oracleCheckBoxName=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+                String v_oracleCheckBoxItemType=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+                String v_oracleCheckBoxEnabled=Refactoring.delSpace(Refactoring.getValueFromLine(Navigate.avancerJusqua(p_fileAccess, p_fileAccess.getFilePointer(), "* Enabled")));
+                String v_oracleCheckBoxLabel=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+                String v_oracleCheckBoxAccessKey=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+                Navigate.nextLine(1, p_fileAccess);
+                String v_oracleCheckBoxValueWhenChecked=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+                String v_oracleCheckBoxValueWhenUnchecked=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+                String v_oracleCheckBoxCheckBoxMappingofOtherValues=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+                String v_oracleCheckBoxPopupMenu=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+                String v_oracleCheckBoxKeyboardNavigable=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+                String v_oracleCheckBoxMouseNavigate=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+                String v_oracleCheckBoxPreviousNavigationItem=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+                String v_oracleCheckBoxNextNavigationItem=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+                String v_oracleCheckBoxDataType=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+                String v_oracleCheckBoxDataLengthSemantics=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+                String v_oracleCheckBoxMaximumLength=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+                String v_oracleCheckBoxInitialValue=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+                String v_oracleCheckBoxCopyValueFromItem=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+                String v_oracleCheckBoxSynchronizeWithItem=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+                String v_oracleCheckBoxCalculationMode=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+                String v_oracleCheckBoxFormula=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+                String v_oracleCheckBoxSummaryFunction=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+                String v_oracleCheckBoxSummarizedBlock=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+                String v_oracleCheckBoxSummarizedItem=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+                String v_oracleCheckBoxNumberofItemDisplayed=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+                Navigate.nextLine(3, p_fileAccess);
+                String v_oracleCheckBoxDatabaseItem=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+                String v_oracleCheckBoxColumnName=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+                String v_oracleCheckBoxPrimaryKey=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+                String v_oracleCheckBoxQueyrOnly=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+                String v_oracleCheckBoxQueryAllowed=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+                String v_oracleCheckBoxInsertAllowed=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+                String v_oracleCheckBoxUpdateAllowed=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+                String v_oracleCheckBoxVisible=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+                Navigate.nextLine(1, p_fileAccess);
+                String v_oracleCheckBoxTabPage=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+                String v_oracleCheckBoxXPosition=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+                String v_oracleCheckBoxYPosition=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+                String v_oracleCheckBoxWidth=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+                String v_oracleCheckBoxHeight=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+                Navigate.nextLine(2, p_fileAccess);
+                String v_oracleCheckBoxForegroundColor=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+                String v_oracleCheckBoxBackGroundColor=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+                Navigate.nextLine(1, p_fileAccess);
+                String v_oracleCheckBoxFont=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+                String v_oracleCheckBoxFontName=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+                String v_oracleCheckBoxFontSize=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+                String v_oracleCheckBoxFontWeight=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+                String v_oracleCheckBoxFontStyle=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+                String v_oracleCheckBoxFontSpacing=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+                String v_oracleCheckBoxHint=Refactoring.delSpace(Refactoring.getValueFromLine(Navigate.avancerJusqua(p_fileAccess, p_fileAccess.getFilePointer(), "* Hint")));
+                String v_oracleCheckBoxDisplayHintAutomatically=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+                String v_oracleCheckBoxTooltip=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+                
+                v_checkBox=new oracleCheckBox(v_oracleCheckBoxName, v_oracleCheckBoxItemType, v_oracleCheckBoxEnabled, v_oracleCheckBoxLabel, v_oracleCheckBoxAccessKey, v_oracleCheckBoxValueWhenChecked, v_oracleCheckBoxValueWhenUnchecked, v_oracleCheckBoxCheckBoxMappingofOtherValues, v_oracleCheckBoxPopupMenu, v_oracleCheckBoxKeyboardNavigable, v_oracleCheckBoxMouseNavigate, v_oracleCheckBoxPreviousNavigationItem, v_oracleCheckBoxNextNavigationItem, v_oracleCheckBoxDataType, v_oracleCheckBoxDataLengthSemantics, v_oracleCheckBoxMaximumLength, v_oracleCheckBoxInitialValue, v_oracleCheckBoxCopyValueFromItem, v_oracleCheckBoxSynchronizeWithItem, v_oracleCheckBoxCalculationMode, v_oracleCheckBoxFormula, v_oracleCheckBoxSummaryFunction, v_oracleCheckBoxSummarizedBlock, v_oracleCheckBoxSummarizedItem, v_oracleCheckBoxNumberofItemDisplayed, v_oracleCheckBoxDatabaseItem, v_oracleCheckBoxColumnName, v_oracleCheckBoxPrimaryKey, v_oracleCheckBoxQueyrOnly, v_oracleCheckBoxQueryAllowed, v_oracleCheckBoxInsertAllowed, v_oracleCheckBoxUpdateAllowed, v_oracleCheckBoxVisible, v_oracleCheckBoxTabPage, v_oracleCheckBoxXPosition, v_oracleCheckBoxYPosition, v_oracleCheckBoxWidth, v_oracleCheckBoxHeight, v_oracleCheckBoxForegroundColor, v_oracleCheckBoxBackGroundColor, v_oracleCheckBoxFont, v_oracleCheckBoxFontName, v_oracleCheckBoxFontSize, v_oracleCheckBoxFontWeight, v_oracleCheckBoxFontStyle, v_oracleCheckBoxFontSpacing, v_oracleCheckBoxHint, v_oracleCheckBoxDisplayHintAutomatically, v_oracleCheckBoxTooltip,new ArrayList<>());
+                
+            } catch (IOException ex) {
+                Logger.getLogger(oracleGetter.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            long v_currentPos=p_fileAccess.getFilePointer();
+            String v_currentState="CheckBox";
+            while((v_currentState=oracleChecker.checkWhatsNext(p_fileAccess, v_currentState)).equals("Method")){
+                v_checkBox.getlistMethod().add(getMethod(p_fileAccess));
+                v_currentPos=p_fileAccess.getFilePointer();
+            }
+                p_fileAccess.seek(v_currentPos);
+            
+            return v_checkBox;
         } catch (IOException ex) {
             Logger.getLogger(oracleGetter.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return v_checkBox;
+        return null;
     }
 }
 
-
-//~ Formatted by Jindent --- http://www.jindent.com

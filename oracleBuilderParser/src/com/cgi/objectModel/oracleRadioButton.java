@@ -64,6 +64,91 @@ public class oracleRadioButton {
         this.m_radioButtonFontStyle           = p_radioButtonFontStyle;
         this.m_radioButtonFontSpacing         = p_radioButtonFontSpacing;
     }
+
+    public String getradioButtonName() {
+        return m_radioButtonName;
+    }
+
+    public String getradioButtonSubclassInformation() {
+        return m_radioButtonSubclassInformation;
+    }
+
+    public String getradioButtonComments() {
+        return m_radioButtonComments;
+    }
+
+    public String getradioButtonEnabled() {
+        return m_radioButtonEnabled;
+    }
+
+    public String getradioButtonLabel() {
+        return m_radioButtonLabel;
+    }
+
+    public String getradioButtonAccessKey() {
+        return m_radioButtonAccessKey;
+    }
+
+    public String getradioButtonRadioButtonValue() {
+        return m_radioButtonRadioButtonValue;
+    }
+
+    public String getradioButtonVisible() {
+        return m_radioButtonVisible;
+    }
+
+    public String getradioButtonXPosition() {
+        return m_radioButtonXPosition;
+    }
+
+    public String getradioButtonYPosition() {
+        return m_radioButtonYPosition;
+    }
+
+    public String getradioButtonWidth() {
+        return m_radioButtonWidth;
+    }
+
+    public String getradioButtonHeight() {
+        return m_radioButtonHeight;
+    }
+
+    public String getradioButtonForegroundColor() {
+        return m_radioButtonForegroundColor;
+    }
+
+    public String getradioButtonBackgroundColor() {
+        return m_radioButtonBackgroundColor;
+    }
+
+    public String getradioButtonFillPattern() {
+        return m_radioButtonFillPattern;
+    }
+
+    public String getradioButtonFont() {
+        return m_radioButtonFont;
+    }
+
+    public String getradioButtonFontName() {
+        return m_radioButtonFontName;
+    }
+
+    public String getradioButtonFontSize() {
+        return m_radioButtonFontSize;
+    }
+
+    public String getradioButtonFontWeight() {
+        return m_radioButtonFontWeight;
+    }
+
+    public String getradioButtonFontStyle() {
+        return m_radioButtonFontStyle;
+    }
+
+    public String getradioButtonFontSpacing() {
+        return m_radioButtonFontSpacing;
+    }
+    
 }
 
 

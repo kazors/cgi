@@ -98,6 +98,7 @@ public class oracleItem  {
 
     ////////////////////////////////////////////////////////////////////////////
     // Help
+    String m_objectPrompt;
     String m_objectHint;
     String m_objectDisplayHintAutomatically;
     String m_objectTooltip;
@@ -123,7 +124,7 @@ public class oracleItem  {
                         String p_objectHeight, String p_objectBevel, String p_objectForeGroundColor,
                         String p_objectBackGroundColor, String p_objectFillPattern, String p_objectFontName,
                         String p_objectFontSize, String p_objectFontWeight, String p_objectFontStyle,
-                        String p_objectFontSpacing, String p_objectHint, String p_objectDisplayHintAutomatically,
+                        String p_objectFontSpacing,String p_objectPrompt, String p_objectHint, String p_objectDisplayHintAutomatically,
                         String p_objectTooltip, ArrayList<PlSqlMethod> p_listMethod) {
         this.m_objectName                     = p_objectName;
         this.m_objectItemType                 = p_objectItemType;
@@ -175,11 +176,17 @@ public class oracleItem  {
         this.m_objectFontWeight               = p_objectFontWeight;
         this.m_objectFontStyle                = p_objectFontStyle;
         this.m_objectFontSpacing              = p_objectFontSpacing;
+        this.m_objectPrompt                   = p_objectPrompt;
         this.m_objectHint                     = p_objectHint;
         this.m_objectDisplayHintAutomatically = p_objectDisplayHintAutomatically;
         this.m_objectTooltip                  = p_objectTooltip;
         this.m_listMethod                     = p_listMethod;
     }
+
+    public String getobjectPrompt() {
+        return m_objectPrompt;
+    }
+    
     
     public void addMethod(PlSqlMethod p_method){
         m_listMethod.add(p_method);
