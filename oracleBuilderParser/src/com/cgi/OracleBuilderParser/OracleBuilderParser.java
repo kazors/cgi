@@ -12,6 +12,8 @@ import com.cgi.Tools.Localise;
 import com.cgi.Tools.Navigate;
 import com.cgi.Tools.oracleChecker;
 import com.cgi.Tools.oracleGetter;
+import static com.cgi.Tools.oracleGetter.getGraphicTextObject;
+import com.cgi.objectModel.GraphicTextObject;
 import com.cgi.objectModel.PlSqlLibraries;
 import com.cgi.objectModel.PlSqlMethod;
 import com.cgi.objectModel.oracleAlert;
@@ -64,6 +66,7 @@ public class OracleBuilderParser {
         ArrayList<oracleRadioGroup> v_listRadioGroup=new ArrayList<>();
         ArrayList<oraclePushButton> v_listPushButton=new ArrayList<>();
         ArrayList<oracleCheckBox> v_listCheckBox=new ArrayList<>();
+        ArrayList<GraphicTextObject> v_listGraphicTextObject=new ArrayList<>();
         try {
             RandomAccessFile v_fileAccess = new RandomAccessFile(v_fichier, "r");
             Navigate.avancerJusqua(v_fileAccess,v_fileAccess.getFilePointer(), "- Relations");
@@ -145,8 +148,13 @@ public class OracleBuilderParser {
                     
             }
                 }while(!(m_currentState=="error"));
-            
-            
+            Navigate.avancerJusqua(v_fileAccess, v_fileAccess.getFilePointer(), "* Graphics Objects");
+            while(!v_fileAccess.readLine().equals("   ----------")){
+                GraphicTextObject v_graphicTextObject=getGraphicTextObject(v_fileAccess);
+                if(v_graphicTextObject.getgraphicTextObjectType().equals("Text")){
+                    v_listGraphicTextObject.add(v_graphicTextObject);
+                }
+            }
             
             
         } catch (FileNotFoundException ex) {
@@ -161,6 +169,8 @@ public class OracleBuilderParser {
         v_listBlock.get(0).setlistCheckBox(v_listCheckBox);
         v_listBlock.get(0).setlistPushButton(v_listPushButton);
         v_listBlock.get(0).setlistRadioGroup(v_listRadioGroup);
+        
+        v_listBlock.get(0).setlistGraphicObject(v_listGraphicTextObject);
         return v_listBlock;
     }
     
@@ -187,8 +197,9 @@ public class OracleBuilderParser {
                 
                 ArrayList<oracleItem> v_listItemInRow=oracleGetter.getItemInRow(p_listBlock.get(0).getListItem(),i);
                 ArrayList<oraclePushButton> v_listPushButtonInRow=oracleGetter.getPushButtonInRow(p_listBlock.get(0).getListPushButton(),i);
+                ArrayList<GraphicTextObject> v_listGraphicTextObjectInRow=oracleGetter.getGraphicTextObjectInRow(p_listBlock.get(0).getlistGraphicObject(),i);
                 ArrayList<oracleRadioGroup> v_listRadioGroupInRow=oracleGetter.getRadioGroupInRow(p_listBlock.get(0).getlistRadioGroup(),i);
-                com.cgi.Tools.Localise.PlaceOrder(v_listCheckBoxInRow,v_listItemInRow,v_listPushButtonInRow,v_listRadioGroupInRow,v_fileWriter,m_tailleX);
+                com.cgi.Tools.Localise.PlaceOrder(v_listCheckBoxInRow,v_listItemInRow,v_listPushButtonInRow,v_listRadioGroupInRow,v_listGraphicTextObjectInRow,v_fileWriter,m_tailleX);
                 v_fileWriter.write("</div>\n");
                 v_fileWriter.write("<div class=\"row\">");
                 v_fileWriter.write("<div class=\" col-sm-offset 12\">");

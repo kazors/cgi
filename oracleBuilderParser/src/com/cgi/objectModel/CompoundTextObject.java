@@ -9,7 +9,7 @@ package com.cgi.objectModel;
  *
  * @author gerardj
  */
-class CompoundTextObject {
+public class CompoundTextObject {
     String m_CompoundTextObjectName;
     SimpleTextObjects m_textObjects;
 

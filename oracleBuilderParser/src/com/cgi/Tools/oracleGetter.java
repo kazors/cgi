@@ -9,8 +9,11 @@ package com.cgi.Tools;
 //~--- non-JDK imports --------------------------------------------------------
 
 import com.cgi.OracleBuilderParser.OracleBuilderParser;
+import com.cgi.objectModel.CompoundTextObject;
+import com.cgi.objectModel.GraphicTextObject;
 import com.cgi.objectModel.PlSqlLibraries;
 import com.cgi.objectModel.PlSqlMethod;
+import com.cgi.objectModel.SimpleTextObjects;
 import com.cgi.objectModel.oracleAlert;
 import com.cgi.objectModel.oracleBlock;
 import com.cgi.objectModel.oracleCheckBox;
@@ -18,6 +21,7 @@ import com.cgi.objectModel.oracleItem;
 import com.cgi.objectModel.oraclePushButton;
 import com.cgi.objectModel.oracleRadioButton;
 import com.cgi.objectModel.oracleRadioGroup;
+import com.sun.prism.image.CompoundTexture;
 
 //~--- JDK imports ------------------------------------------------------------
 
@@ -901,6 +905,84 @@ public class oracleGetter {
         
         }
         return v_listRadioGroupInRow;
+    }
+    
+    public static GraphicTextObject getGraphicTextObject(RandomAccessFile p_fileAccess){
+        GraphicTextObject v_GraphicTextObject=null;
+        try {
+            String v_graphicTextObjectName=Refactoring.delSpace(Refactoring.getValueFromLine(Navigate.avancerJusqua(p_fileAccess, p_fileAccess.getFilePointer(), "* Name")));
+            String v_graphicTextObjectType=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+            Navigate.nextLine(1, p_fileAccess);
+            String v_graphicTextObjectXPosition=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+            String v_graphicTextObjectYPosition=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+            String v_graphicTextObjectWidth=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+            String v_graphicTextObjectHeight=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+            String v_graphicTextObjectLineWidth=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+            String v_graphicTextObjectDashStyle=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+            String v_graphicTextObjectCapStyle=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+            String v_graphicTextObjectJoinStyle=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+            String v_graphicTextObjectRotationAngle=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+            String v_graphicTextObjectCustomSpacing=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+            String v_graphicTextObjectLineSpacing=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+            String v_graphicTextObjectFixedBoundingBox=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+            String v_graphicTextObjectWrapText=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+            String v_graphicTextObjectBoundingBoxScaleable=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+            String v_graphicTextObjectFontScaleable=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+            String v_graphicTextObjectHorizontalJustification=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+            String v_graphicTextObjectVerticalJustification=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+            String v_graphicTextObjectHorizontalOrigin=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+            String v_graphicTextObjectVerticalOrigin=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+            String v_graphicTextObjectBevel=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+            Navigate.nextLine(7, p_fileAccess);
+            String v_graphicTextObjectDirection=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+            Navigate.nextLine(2, p_fileAccess);
+            CompoundTextObject v_testObject=GetCoupoundTextObject(p_fileAccess);
+            v_GraphicTextObject=new GraphicTextObject(v_graphicTextObjectName, v_graphicTextObjectType, v_graphicTextObjectXPosition, v_graphicTextObjectYPosition, v_graphicTextObjectWidth, v_graphicTextObjectHeight, v_graphicTextObjectLineWidth, v_graphicTextObjectDashStyle, v_graphicTextObjectCapStyle, v_graphicTextObjectJoinStyle, v_graphicTextObjectRotationAngle, v_graphicTextObjectCustomSpacing, v_graphicTextObjectLineSpacing, v_graphicTextObjectFixedBoundingBox, v_graphicTextObjectWrapText, v_graphicTextObjectBoundingBoxScaleable, v_graphicTextObjectFontScaleable, v_graphicTextObjectHorizontalJustification, v_graphicTextObjectVerticalJustification, v_graphicTextObjectHorizontalOrigin, v_graphicTextObjectVerticalOrigin, v_graphicTextObjectBevel, v_graphicTextObjectDirection, v_testObject);
+        } catch (IOException ex) {
+            Logger.getLogger(oracleGetter.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return v_GraphicTextObject;
+    }
+
+    private static CompoundTextObject GetCoupoundTextObject(RandomAccessFile p_fileAccess) {
+        CompoundTextObject v_CompoundTextObject=null;
+        try {
+            String v_CompoundTextObjectName=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+            Navigate.nextLine(2, p_fileAccess);
+            SimpleTextObjects v_textObjects=GetTextObjects(p_fileAccess);
+            v_CompoundTextObject=new CompoundTextObject(v_CompoundTextObjectName, v_textObjects);
+        } catch (IOException ex) {
+            Logger.getLogger(oracleGetter.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return v_CompoundTextObject;
+    }
+
+    private static SimpleTextObjects GetTextObjects(RandomAccessFile p_fileAccess) {
+        SimpleTextObjects v_textObjects=null;
+        try {
+            String v_SimpleTextObjectsName=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+            Navigate.nextLine(1, p_fileAccess);
+            String v_SimpleTextObjectsListItemValue=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+            v_textObjects=new SimpleTextObjects(v_SimpleTextObjectsName,v_SimpleTextObjectsListItemValue);
+        } catch (IOException ex) {
+            Logger.getLogger(oracleGetter.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return v_textObjects;
+    }
+
+    public static ArrayList<GraphicTextObject> getGraphicTextObjectInRow(ArrayList<GraphicTextObject> p_listGraphicObject, int p_nbLine) {
+         ArrayList<GraphicTextObject> v_listGraphicTextObjectInRow=new ArrayList<>();
+        for(GraphicTextObject v_GraphicTextObject : p_listGraphicObject){
+            String[] v_positionY = v_GraphicTextObject.getgraphicTextObjectYPosition().split("\\.");
+            if(v_positionY[0]==""){
+                v_positionY[0]="0";
+            }
+            if(v_positionY[0].equals(Integer.toString(p_nbLine))){
+                v_listGraphicTextObjectInRow.add(v_GraphicTextObject);
+            }
+        
+        }
+        return v_listGraphicTextObjectInRow;
     }
 }
 

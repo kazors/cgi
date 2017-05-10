@@ -252,5 +252,19 @@ public class oracleChecker {
         
         return "error";
     }
-    
+    public static boolean checkThatGraphicsObject(RandomAccessFile p_fileAccess){
+        try {
+            long v_currentPos=p_fileAccess.getFilePointer();
+            Navigate.nextLine(1, p_fileAccess);
+            if(Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine())).equals("Text")){
+                p_fileAccess.seek(v_currentPos);
+                return true;}else{
+                return false;
+            }
+            
+        } catch (IOException ex) {
+            Logger.getLogger(oracleChecker.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
 }

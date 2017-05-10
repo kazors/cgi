@@ -9,7 +9,7 @@ package com.cgi.objectModel;
  *
  * @author gerardj
  */
-class SimpleTextObjects {
+public class SimpleTextObjects {
     String m_SimpleTextObjectsName;
     String m_SimpleTextObjectsListItemValue;
 

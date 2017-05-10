@@ -5,6 +5,7 @@
  */
 package com.cgi.Tools;
 
+import com.cgi.objectModel.GraphicTextObject;
 import com.cgi.objectModel.oracleCheckBox;
 import com.cgi.objectModel.oracleItem;
 import com.cgi.objectModel.oraclePushButton;
@@ -23,13 +24,14 @@ import java.util.logging.Logger;
  */
 public class Localise {
 
-    public static void PlaceOrder(ArrayList<oracleCheckBox> p_listCheckBoxInRow, ArrayList<oracleItem> p_listItemInRow, ArrayList<oraclePushButton> p_listPushButtonInRow, ArrayList<oracleRadioGroup> p_listRadioGroupInRow,FileWriter p_writer,int p_tailleX) {
+    public static void PlaceOrder(ArrayList<oracleCheckBox> p_listCheckBoxInRow, ArrayList<oracleItem> p_listItemInRow, ArrayList<oraclePushButton> p_listPushButtonInRow, ArrayList<oracleRadioGroup> p_listRadioGroupInRow,ArrayList<GraphicTextObject> p_listGraphicTextObjectInRow, FileWriter p_writer,int p_tailleX) {
         oracleCheckBox v_checkBox=null;
         oracleItem v_item=null;
         oraclePushButton v_pushButton=null;
         oracleRadioGroup v_RadioGroup=null;
+        GraphicTextObject v_GraphicTextObject=null;
         int v_posX=p_tailleX;
-        while(!(p_listCheckBoxInRow.isEmpty() && p_listItemInRow.isEmpty() && p_listPushButtonInRow.isEmpty() && p_listRadioGroupInRow.isEmpty())){
+        while(!(p_listCheckBoxInRow.isEmpty() && p_listItemInRow.isEmpty() && p_listPushButtonInRow.isEmpty() && p_listRadioGroupInRow.isEmpty() && p_listGraphicTextObjectInRow.isEmpty())){
             
            
             for(oracleCheckBox v_currentCheckBox : p_listCheckBoxInRow){
@@ -64,7 +66,7 @@ public class Localise {
            for(oraclePushButton v_currentPushButton : p_listPushButtonInRow){
                
                String v_posString=v_currentPushButton.getoraclePushButtonXPosition().split("\\.")[0];
-               System.out.println("la : "+v_currentPushButton.getoraclePushButtonName()+" et la "+v_posString);
+               
                if(v_posString.equals("")){
                    v_posString="0";
                }
@@ -89,37 +91,56 @@ public class Localise {
                    v_posX=v_currentPosX;
                }
            }
+           
+           for(GraphicTextObject v_CurrentGraphicTextObject : p_listGraphicTextObjectInRow){
+                String v_posString=v_CurrentGraphicTextObject.getgraphicTextObjectXPosition().split("\\.")[0];
+                if(v_posString.equals("")){
+                    v_posString="0";
+                }
+                int v_CurrentPosX=Integer.parseInt(v_posString);
+                
+                if(v_CurrentPosX<=v_posX){
+                    v_GraphicTextObject=v_CurrentGraphicTextObject;
+                    v_RadioGroup=null;
+                    v_posX=v_CurrentPosX;
+                }
+                
+            }
            if(v_checkBox!=null){
                Writer.WriteCheckBox(v_checkBox, p_writer);
-               System.out.println("taille avant : "+p_listCheckBoxInRow.size());
-               System.out.println("j'ecris une checkbox ");
+               
                p_listCheckBoxInRow.remove(v_checkBox);
                v_checkBox=null;
                v_posX=p_tailleX;
-               System.out.println("taille apres : "+p_listCheckBoxInRow.size());
+               
            }else if(v_RadioGroup!=null){
-               System.out.println("taille radio group avant : "+p_listRadioGroupInRow.size());
+               
                Writer.writeRadioGroup(v_RadioGroup, p_writer);
-               System.out.println("j'ecris une radio group");
+              
                p_listRadioGroupInRow.remove(v_RadioGroup);
                v_RadioGroup=null;
-               System.out.println("taille radio group apres : "+p_listRadioGroupInRow.size());
+               
                v_posX=p_tailleX;
            }else if(v_item!=null){
-               System.out.println("taille item : "+p_listItemInRow.size());
+               
                Writer.writeItem(v_item,p_writer);
-               System.out.println("j'ecris des items");
+               
                p_listItemInRow.remove(v_item);
                v_item=null;
-               System.out.println("taille item apres : "+p_listItemInRow.size());
+               
                v_posX=p_tailleX;
            }else if (v_pushButton!=null){
-               System.out.println("taille push button avant : "+p_listPushButtonInRow.size());
+               
                Writer.writeButton(v_pushButton,p_writer);
-               System.out.println("j'ecris un push button");
+               
                p_listPushButtonInRow.remove(v_pushButton);
                v_pushButton=null;
-               System.out.println("taille bouton apres : "+p_listPushButtonInRow.size());
+               
+               v_posX=p_tailleX;
+           }else if(v_GraphicTextObject!= null){
+               Writer.WriteLabel(v_GraphicTextObject,p_writer);
+               p_listGraphicTextObjectInRow.remove(v_GraphicTextObject);
+               v_GraphicTextObject=null;
                v_posX=p_tailleX;
            }
         }

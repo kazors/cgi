@@ -5,6 +5,7 @@
  */
 package com.cgi.objectWriter;
 
+import com.cgi.objectModel.GraphicTextObject;
 import com.cgi.objectModel.oracleCheckBox;
 import com.cgi.objectModel.oracleItem;
 import com.cgi.objectModel.oraclePushButton;
@@ -32,10 +33,11 @@ public class Writer {
             Logger.getLogger(Writer.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    
+    
     public static void writeRadioGroup(oracleRadioGroup v_RadioGroup, FileWriter p_writer) {
         try {
-            p_writer.write(v_RadioGroup.getoracleRadioGroupName()+"   :    ");
+            //p_writer.write(v_RadioGroup.getoracleRadioGroupName()+"   :    ");
             p_writer.write("<form>\n");
             
             for(oracleRadioButton v_radioButton : v_RadioGroup.getListButton()){
@@ -51,9 +53,9 @@ public class Writer {
 
     public static void writeItem(oracleItem v_item, FileWriter p_writer) {
         try {
-            p_writer.write("<div class=\" col-sm-offset-1 col-sm-4\">\n");
+            p_writer.write("<div class=\"  col-sm-4\">\n");
             p_writer.write("<form>\n");
-            p_writer.write(v_item.getobjectName()+"   :   \n");
+            //p_writer.write(v_item.getobjectName()+"   :   \n");
             p_writer.write("<input type=\"text\" name=\""+v_item.getobjectName()+"\"><br>\n");
             p_writer.write("</form>\n");
             p_writer.write("</div> \n");
@@ -68,6 +70,16 @@ public class Writer {
             p_writer.write("<input type=\"button\" onclick=\"alert('"+v_pushButton.getoraclePushButtonName()+"')\" value = \""+v_pushButton.getoraclePushButtonIconic()+"\">\n");
             p_writer.write("</div> \n");
             
+        } catch (IOException ex) {
+            Logger.getLogger(Writer.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public static void WriteLabel(GraphicTextObject v_GraphicTextObject, FileWriter p_writer) {
+        try {
+            p_writer.write("<div class=\"col-sm-2\">\n");
+            p_writer.write(v_GraphicTextObject.gettextObject().getSimpleTextObjects().getSimpleTextObjectsListItemValue());
+            p_writer.write("</div> \n");
         } catch (IOException ex) {
             Logger.getLogger(Writer.class.getName()).log(Level.SEVERE, null, ex);
         }
