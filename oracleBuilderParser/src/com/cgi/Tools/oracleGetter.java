@@ -88,7 +88,7 @@ public class oracleGetter {
         try {
             do {
                 
-                System.out.println("RADIO BUTTOn");
+                
                 String v_radioButtonName                =
                     Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
                 String v_radioButtonSubClassInformation =
@@ -138,7 +138,7 @@ public class oracleGetter {
                 String v_radioButtonFontSpacing =
                     Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
                 Navigate.nextLine(1, p_fileAccess);
-                System.out.println("nom du radio ajouté : "+v_radioButtonName);
+                
                 
                 v_listButton.add(new oracleRadioButton(v_radioButtonName, v_radioButtonSubClassInformation,
                         v_radioButtonComments, v_radioButtonEnabled, v_radioButtonLabel, v_radioButtonAccessKey,
@@ -181,7 +181,7 @@ public class oracleGetter {
                 Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
             String v_oracleRadioGroupDataType =
                 Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
-            System.out.println("type data : "+v_oracleRadioGroupPopupMenu);
+            
             String v_oracleRadioGroupDataLengthSemantics =
                 Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
             String v_oracleRadioGroupMaximumLength =
@@ -515,7 +515,7 @@ public class oracleGetter {
                                       v_blockLockProcedureName, v_blockLockProcedureResultSetColumns,
                                       v_blockLockProcedureArguments, v_blockDMLArraySize, v_blockPrecomputeSumarries,
                                       v_blockDMLReturningValues, new ArrayList<>(), new ArrayList<>(),
-                                      new ArrayList<>(),new ArrayList<>(),new ArrayList<>());
+                                      new ArrayList<>(),new ArrayList<>(),new ArrayList<>(),new ArrayList<>());
         } catch (IOException ex) {
             Logger.getLogger(OracleBuilderParser.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -758,8 +758,11 @@ public class oracleGetter {
                 String v_oracleCheckBoxEnabled=Refactoring.delSpace(Refactoring.getValueFromLine(Navigate.avancerJusqua(p_fileAccess, p_fileAccess.getFilePointer(), "* Enabled")));
                 String v_oracleCheckBoxLabel=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
                 String v_oracleCheckBoxAccessKey=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+                
                 Navigate.nextLine(1, p_fileAccess);
+                
                 String v_oracleCheckBoxValueWhenChecked=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+                
                 String v_oracleCheckBoxValueWhenUnchecked=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
                 String v_oracleCheckBoxCheckBoxMappingofOtherValues=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
                 String v_oracleCheckBoxPopupMenu=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
@@ -778,8 +781,9 @@ public class oracleGetter {
                 String v_oracleCheckBoxSummaryFunction=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
                 String v_oracleCheckBoxSummarizedBlock=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
                 String v_oracleCheckBoxSummarizedItem=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+                Navigate.nextLine(2, p_fileAccess);
                 String v_oracleCheckBoxNumberofItemDisplayed=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
-                Navigate.nextLine(3, p_fileAccess);
+                
                 String v_oracleCheckBoxDatabaseItem=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
                 String v_oracleCheckBoxColumnName=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
                 String v_oracleCheckBoxPrimaryKey=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
@@ -792,6 +796,7 @@ public class oracleGetter {
                 String v_oracleCheckBoxTabPage=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
                 String v_oracleCheckBoxXPosition=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
                 String v_oracleCheckBoxYPosition=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+                
                 String v_oracleCheckBoxWidth=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
                 String v_oracleCheckBoxHeight=Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
                 Navigate.nextLine(2, p_fileAccess);
@@ -826,6 +831,76 @@ public class oracleGetter {
             Logger.getLogger(oracleGetter.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
+    }
+
+    public static ArrayList<oracleCheckBox> getCheckBoxInRow(ArrayList<oracleCheckBox> p_listCheckBox, int p_nbLine) {
+        ArrayList<oracleCheckBox> v_listCheckBoxInRow=new ArrayList<>();
+        for(oracleCheckBox v_checkBox : p_listCheckBox){
+            String[] v_positionY = v_checkBox.getoracleCheckBoxYPosition().split("\\.");
+            
+            if(v_positionY[0]==""||v_positionY.length==1){
+                
+                v_positionY[0]="0";
+            }
+            System.out.println("p_nbLine : "+p_nbLine);
+            if(v_positionY[0].equals(Integer.toString(p_nbLine))){
+                v_listCheckBoxInRow.add(v_checkBox);
+            }
+        
+        }
+        return v_listCheckBoxInRow;
+    }
+
+    public static ArrayList<oracleItem> getItemInRow(ArrayList<oracleItem> p_listItem, int p_nbLine) {
+        
+       ArrayList<oracleItem> v_listItemInRow=new ArrayList<>();
+        for(oracleItem v_Item : p_listItem){
+            
+            if(v_Item.getobjectVisible().equals("Yes")){
+                
+            String[] v_positionY = v_Item.getobjectPositionY().split("\\.");
+                
+            if(v_positionY[0].equals("")){
+                v_positionY[0]="0";
+                
+            }
+            if(v_positionY[0].equals(Integer.toString(p_nbLine))){
+                
+                v_listItemInRow.add(v_Item);
+            }
+            }
+        }
+        return v_listItemInRow;
+    }
+
+    public static ArrayList<oraclePushButton> getPushButtonInRow(ArrayList<oraclePushButton> p_listPushButton, int p_nbLine) {
+        ArrayList<oraclePushButton> v_listPushButtonInRow=new ArrayList<>();
+        for(oraclePushButton v_PushButton : p_listPushButton){
+            String[] v_positionY = v_PushButton.getoraclePushButtonYPosition().split("\\.");
+            if(v_positionY[0]==""){
+                v_positionY[0]="0";
+            }
+            if(v_positionY[0].equals(Integer.toString(p_nbLine))){
+                v_listPushButtonInRow.add(v_PushButton);
+            }
+        
+        }
+        return v_listPushButtonInRow;
+    }
+
+    public static ArrayList<oracleRadioGroup> getRadioGroupInRow(ArrayList<oracleRadioGroup> p_listRadioGroup, int p_nbLine) {
+        ArrayList<oracleRadioGroup> v_listRadioGroupInRow=new ArrayList<>();
+        for(oracleRadioGroup v_RadioGroup : p_listRadioGroup){
+            String[] v_positionY = v_RadioGroup.getListButton().get(0).getradioButtonYPosition().split("\\.");
+            if(v_positionY[0]==""){
+                v_positionY[0]="0";
+            }
+            if(v_positionY[0].equals(Integer.toString(p_nbLine))){
+                v_listRadioGroupInRow.add(v_RadioGroup);
+            }
+        
+        }
+        return v_listRadioGroupInRow;
     }
 }
 

@@ -119,7 +119,7 @@ public class oracleChecker {
                 
                 p_fileAccess.seek(v_currentPos);
                 Navigate.nextLine(7, p_fileAccess);
-                System.out.println("p_fileAccess : "+p_fileAccess.readLine());
+                
                 p_fileAccess.seek(v_currentPos);
                 Navigate.nextLine(8, p_fileAccess);
                 if((Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine().trim())).equals("PL/SQL"))){
@@ -134,7 +134,7 @@ public class oracleChecker {
                 p_fileAccess.seek(v_currentPos);
                 Navigate.nextLine(6, p_fileAccess);
                  v_line=p_fileAccess.readLine().trim();
-                System.out.println("v_line : "+v_line);
+                
                 if((v_line.startsWith("* Item Type"))||(v_line.startsWith("^ Item Type"))){
                     
                     p_fileAccess.seek(v_currentPos);

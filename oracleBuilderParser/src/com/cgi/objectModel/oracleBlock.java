@@ -74,6 +74,7 @@ public class oracleBlock {
     ArrayList<oracleRadioGroup> m_listRadioGroup;
     ArrayList<oraclePushButton> m_listPushButton;
     ArrayList<oracleCheckBox> m_listCheckBox;
+    ArrayList<GraphicTextObject> m_listGraphicObject;
 
     public oracleBlock(String p_blockName, String p_blockSubclassInformation, String p_blockNavigationStyle,
             String p_blockPreviousNavigationDataBlock, String p_blockNextNavigationDataBlock,
@@ -98,7 +99,7 @@ public class oracleBlock {
             String p_blockPrecomputeSummaries, String p_blockDMLReturningValue,
             ArrayList<oracleItem> p_ListItem, ArrayList<PlSqlMethod> p_ListMethod, 
             ArrayList<oracleRadioGroup> p_listRadioGroup, ArrayList<oraclePushButton> p_listPushButton, 
-            ArrayList<oracleCheckBox> p_listCheckBox) {
+            ArrayList<oracleCheckBox> p_listCheckBox, ArrayList<GraphicTextObject> p_listGraphicObject ) {
         this.m_blockName = p_blockName;
         this.m_blockSubclassInformation = p_blockSubclassInformation;
         this.m_blockNavigationStyle = p_blockNavigationStyle;
@@ -153,12 +154,26 @@ public class oracleBlock {
         this.m_listRadioGroup = p_listRadioGroup;
         this.m_listPushButton = p_listPushButton;
         this.m_listCheckBox=p_listCheckBox;
+        this.m_listGraphicObject=p_listGraphicObject;
     }
 
+    public ArrayList<GraphicTextObject> getlistGraphicObject() {
+        return m_listGraphicObject;
+    }
+
+    public void setlistGraphicObject(ArrayList<GraphicTextObject> m_listGraphicObject) {
+        this.m_listGraphicObject = m_listGraphicObject;
+    }
+    
+    
     private void AddMethod(PlSqlMethod p_method) {
         m_ListMethod.add(p_method);
     }
 
+    public ArrayList<oracleCheckBox> getlistCheckBox() {
+        return m_listCheckBox;
+    }
+    
     public String getblockName() {
         return m_blockName;
     }

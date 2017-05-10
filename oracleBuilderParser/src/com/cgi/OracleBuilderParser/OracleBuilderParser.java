@@ -8,6 +8,7 @@ package com.cgi.OracleBuilderParser;
 
 //~--- non-JDK imports --------------------------------------------------------
 
+import com.cgi.Tools.Localise;
 import com.cgi.Tools.Navigate;
 import com.cgi.Tools.oracleChecker;
 import com.cgi.Tools.oracleGetter;
@@ -45,6 +46,7 @@ public class OracleBuilderParser {
      * @param args the command line arguments
      */
     static String m_currentState;
+    static int m_tailleX,m_tailleY;
     public static void main(String[] args) {
         
         
@@ -79,69 +81,69 @@ public class OracleBuilderParser {
             
             do{switch(m_currentState){
                 case "Block":
-                    System.out.println("je lit un block");
+                   
                     v_listBlock.add(oracleGetter.getBlock(v_fileAccess));
-                    System.out.println("j'ai ajouter un block du nom de "+v_listBlock.get(v_listBlock.size()-1).getblockName());
+                   
                     break;
                 case "Item" :
-                    System.out.println("je lit un text item");
+                    
                     v_listObject.add(oracleGetter.getItem(v_fileAccess));
                     
                     
                      
                     
                     m_currentState=oracleChecker.checkWhatsNext(v_fileAccess, m_currentState);
-                    System.out.println("j'ai ajouter un text item du nom de "+v_listObject.get(v_listObject.size()-1).getobjectName());
+                    
                     break;
                 case "Method" :
-                        System.out.println("je lit une methode");
+                        
                     v_listObject.get(v_listObject.size()-1).addMethod(oracleGetter.getMethod(v_fileAccess));
                     
                     m_currentState=oracleChecker.checkWhatsNext(v_fileAccess, m_currentState);
-                    System.out.println("j'ai ajouter une method  ");
+                    
                     break;
                 case "Radio Group" :
-                    System.out.println("j'ajoute un radio group");
+                    
                     v_listRadioGroup.add(oracleGetter.getRadioGroup(v_fileAccess));
                     m_currentState=oracleChecker.checkWhatsNext(v_fileAccess, m_currentState);
-                    System.out.println("j'ai ajouter un radio group du nom de "+v_listRadioGroup.get(v_listRadioGroup.size()-1).getoracleRadioGroupName());
+                   
                     break;
                     
                 case "Push Button" :
-                    System.out.println("j'ajoute un push button");
+                    
                     v_listPushButton.add(oracleGetter.getPushButton(v_fileAccess));
                     if(v_listPushButton.get(v_listPushButton.size()-1).getlistMethod().size()==0){
                     m_currentState=oracleChecker.checkWhatsNext(v_fileAccess, m_currentState);}
                     else{
-                        System.out.println("le push button avait des method");
+                        
                         m_currentState=oracleChecker.checkWhatsNext(v_fileAccess, "Method");
                         break;
                     }
                     
-                    System.out.println("j'ai ajouter un push button du nom de "+v_listPushButton.get(v_listPushButton.size()-1).getoraclePushButtonName());
+                    
                     break;
                     
                 case "Check Box" :
-                    System.out.println("j'ajoute une checkbox");
+                    
                     v_listCheckBox.add(oracleGetter.getCheckBox(v_fileAccess));
-                    System.out.println("la list box : "+v_listCheckBox.get(0).getlistMethod().size());
+                    
                     if(v_listCheckBox.get(v_listCheckBox.size()-1).getlistMethod().size()!=0){
-                        System.out.println("la checkbox a des methodes");
+                        
                         m_currentState=oracleChecker.checkWhatsNext(v_fileAccess, "Method");
                         break;
                     }else{
                         
                         m_currentState=oracleChecker.checkWhatsNext(v_fileAccess, m_currentState);
-                         System.out.println("j'ai ajouter une checkbox du nom de "+v_listCheckBox.get(v_listCheckBox.size()-1).getoracleCheckBoxName());
+                         
                         break;
                     }
                    
                     
                 case "Error" :
-                    System.out.println("j'ai une erreur");
+                    
                     System.out.println("Erreur lors du parsage du fichier");
                     
-            }System.out.println("m_current = "+m_currentState);
+            }
                 }while(!(m_currentState=="error"));
             
             
@@ -164,6 +166,9 @@ public class OracleBuilderParser {
     
     public static void writeFile(ArrayList<oracleBlock> p_listBlock){
         try {
+            m_tailleX=Localise.getTailleX(p_listBlock.get(0).getListItem(),p_listBlock.get(0).getListPushButton(),p_listBlock.get(0).getlistCheckBox(),p_listBlock.get(0).getlistRadioGroup())+5;
+            m_tailleY=Localise.getTailleY(p_listBlock.get(0).getListItem(),p_listBlock.get(0).getListPushButton(),p_listBlock.get(0).getlistCheckBox(),p_listBlock.get(0).getlistRadioGroup())+5;
+            System.out.println("je passe ici");
             FileWriter v_fileWriter= new FileWriter(new File("view.html"));
             v_fileWriter.write("<!doctype html>\n");
             v_fileWriter.write("<html lang=\"fr\">\n");
@@ -174,37 +179,24 @@ public class OracleBuilderParser {
             v_fileWriter.write(" <link href=\"bootstrap/css/bootstrap-theme.min.css\" rel=\"stylesheett\"");
             v_fileWriter.write("</head>\n");
             v_fileWriter.write("<body>\n");
-            
-            
-            
-            v_fileWriter.write("<h1>"+p_listBlock.get(0).getblockName()+"</h1>\n");
-            // l'a je genere les input
-            v_fileWriter.write("<br> <br> <br> <br> <br> <br>Liste des textes areas <br> \n");
-            for(oracleItem v_item : p_listBlock.get(0).getListItem()){
-                if(v_item.getobjectVisible().equals("yes"))
-                v_fileWriter.write("<form>\n");
-                v_fileWriter.write(" "+v_item.getobjectName()+"\n");
-                v_fileWriter.write(" <input type=\"text\" name=\""+v_item.getobjectName()+"\"><br>\n");
-                v_fileWriter.write("</form>\n");
+            v_fileWriter.write("<div class=\"container\">\n");
+            for(int i=0;i<m_tailleY;i++){
+                v_fileWriter.write("<div class=\"row\">\n");
+                
+                ArrayList<oracleCheckBox> v_listCheckBoxInRow=oracleGetter.getCheckBoxInRow(p_listBlock.get(0).getlistCheckBox(),i);
+                
+                ArrayList<oracleItem> v_listItemInRow=oracleGetter.getItemInRow(p_listBlock.get(0).getListItem(),i);
+                ArrayList<oraclePushButton> v_listPushButtonInRow=oracleGetter.getPushButtonInRow(p_listBlock.get(0).getListPushButton(),i);
+                ArrayList<oracleRadioGroup> v_listRadioGroupInRow=oracleGetter.getRadioGroupInRow(p_listBlock.get(0).getlistRadioGroup(),i);
+                com.cgi.Tools.Localise.PlaceOrder(v_listCheckBoxInRow,v_listItemInRow,v_listPushButtonInRow,v_listRadioGroupInRow,v_fileWriter,m_tailleX);
+                v_fileWriter.write("</div>\n");
+                v_fileWriter.write("<div class=\"row\">");
+                v_fileWriter.write("<div class=\" col-sm-offset 12\">");
+                v_fileWriter.write("</div>");
+                v_fileWriter.write("</div>");
             }
-            v_fileWriter.write("<br> <br> <br> <br> <br> <br> liste des buttons <br>\n");
-            for(oraclePushButton v_pushButton : p_listBlock.get(0).getListPushButton()){
-                if(v_pushButton.getoraclePushButtonLabel().equals("")){
-                    v_fileWriter.write("<input type=\button\" onclick=\"alert('"+v_pushButton.getoraclePushButtonName()+"')\" value=\""+"c'est une icone "+"\"readonly>\n");
-                }else{
-               v_fileWriter.write("<input type=\button\" onclick=\"alert('"+v_pushButton.getoraclePushButtonName()+"')\" value=\""+v_pushButton.getoraclePushButtonLabel()+"\">");
-                }}
+            v_fileWriter.write("</div>\n");
             
-            v_fileWriter.write("<br> <br> <br> <br> <br> <br> <br> <br> liste des radio buttons <br> \n");
-            
-            for(oracleRadioGroup v_radioGroup :p_listBlock.get(0).getlistRadioGroup()){
-                v_fileWriter.write("nom du radio group : "+v_radioGroup.getoracleRadioGroupName());
-                v_fileWriter.write("<form>\n");
-                for(oracleRadioButton v_radioButton: v_radioGroup.getListButton()){
-                    v_fileWriter.write(" <input type=\"radio\" name = \""+"radio button"+"\" value=\""+v_radioButton.getradioButtonLabel()+"\">"+v_radioButton.getradioButtonLabel()+"<br>\n");
-                }
-                v_fileWriter.write("</form>");
-            }
             
             
             v_fileWriter.write("</body>\n");
