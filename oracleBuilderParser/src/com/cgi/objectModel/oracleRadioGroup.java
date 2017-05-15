@@ -128,7 +128,7 @@ public class oracleRadioGroup  {
         this.m_ListButton                               = p_ListButton;
         this.m_listMethod                               = p_listMethod;
     }
-
+    
     public ArrayList<PlSqlMethod> getlistMethod() {
         return m_listMethod;
     }

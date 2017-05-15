@@ -24,11 +24,13 @@ public class Writer {
 
     public static void WriteCheckBox(oracleCheckBox v_checkBox, FileWriter p_writer) {
         try {
-            p_writer.write("<div class=\"col-sm-"+(v_checkBox.getoracleCheckBoxWidth().split("\\."))[0]+"\">\n");
+           
+            p_writer.write("<div class=\"col-sm-"+"1"+"\">\n");
             p_writer.write("<form>\n");
             p_writer.write(" <input type=\"checkbox\" name=\""+v_checkBox.getoracleCheckBoxName()+"\" value=\""+v_checkBox.getoracleCheckBoxName()+"\"> "+v_checkBox.getoracleCheckBoxLabel()+"<br>\n");
             p_writer.write("</form>\n");
             p_writer.write("</div>\n");
+           
         } catch (IOException ex) {
             Logger.getLogger(Writer.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -38,6 +40,7 @@ public class Writer {
     public static void writeRadioGroup(oracleRadioGroup v_RadioGroup, FileWriter p_writer) {
         try {
             //p_writer.write(v_RadioGroup.getoracleRadioGroupName()+"   :    ");
+            
             p_writer.write("<form>\n");
             
             for(oracleRadioButton v_radioButton : v_RadioGroup.getListButton()){
@@ -46,6 +49,7 @@ public class Writer {
                 p_writer.write("</div>\n");
             }
             p_writer.write("</form>\n");
+            
         } catch (IOException ex) {
             Logger.getLogger(Writer.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -53,12 +57,17 @@ public class Writer {
 
     public static void writeItem(oracleItem v_item, FileWriter p_writer) {
         try {
-            p_writer.write("<div class=\"  col-sm-4\">\n");
+            p_writer.write("<div class=\"  col-sm-1\">\n");
+           p_writer.write(v_item.getobjectName()+"   :   \n");
+            p_writer.write("</div> \n");
+            p_writer.write("<div class=\"  col-sm-2\">\n");
+             
             p_writer.write("<form>\n");
-            //p_writer.write(v_item.getobjectName()+"   :   \n");
-            p_writer.write("<input type=\"text\" name=\""+v_item.getobjectName()+"\"><br>\n");
+            System.out.println(v_item.getobjectHint());
+            p_writer.write("<input type=\"text\" name=\""+v_item.getobjectName()+"\" ><br>\n");
             p_writer.write("</form>\n");
             p_writer.write("</div> \n");
+            
         } catch (IOException ex) {
             Logger.getLogger(Writer.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -66,8 +75,9 @@ public class Writer {
 
     public static void writeButton(oraclePushButton v_pushButton, FileWriter p_writer) {
         try {
+            
             p_writer.write("<div class=\"col-sm-"+"1"+"\">\n");
-            p_writer.write("<input type=\"button\" onclick=\"alert('"+v_pushButton.getoraclePushButtonName()+"')\" value = \""+v_pushButton.getoraclePushButtonIconic()+"\">\n");
+            p_writer.write("<button type=\"button\" onclick=\"alert('"+v_pushButton.getoraclePushButtonName()+"')\" > "+"<img src=\"icone.jpg\">"+"\n");
             p_writer.write("</div> \n");
             
         } catch (IOException ex) {
@@ -77,9 +87,14 @@ public class Writer {
 
     public static void WriteLabel(GraphicTextObject v_GraphicTextObject, FileWriter p_writer) {
         try {
+            if(v_GraphicTextObject.gettextObject().getSimpleTextObjects().getSimpleTextObjectsListItemValue().equals("Nom :")){
+                    
+                }
+            
             p_writer.write("<div class=\"col-sm-2\">\n");
             p_writer.write(v_GraphicTextObject.gettextObject().getSimpleTextObjects().getSimpleTextObjectsListItemValue());
             p_writer.write("</div> \n");
+            
         } catch (IOException ex) {
             Logger.getLogger(Writer.class.getName()).log(Level.SEVERE, null, ex);
         }

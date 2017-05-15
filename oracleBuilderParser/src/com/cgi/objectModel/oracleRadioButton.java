@@ -65,6 +65,16 @@ public class oracleRadioButton {
         this.m_radioButtonFontSpacing         = p_radioButtonFontSpacing;
     }
 
+    public void setradioButtonXPosition(String m_radioButtonXPosition) {
+        this.m_radioButtonXPosition = m_radioButtonXPosition;
+    }
+
+    public void setradioButtonYPosition(String m_radioButtonYPosition) {
+        this.m_radioButtonYPosition = m_radioButtonYPosition;
+    }
+    
+    
+
     public String getradioButtonName() {
         return m_radioButtonName;
     }

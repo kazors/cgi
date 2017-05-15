@@ -139,6 +139,16 @@ public class oracleCheckBox {
         this.m_listMethod                                 = p_listMethod;
     }
 
+    public void setoracleCheckBoxXPosition(String m_oracleCheckBoxXPosition) {
+        this.m_oracleCheckBoxXPosition = m_oracleCheckBoxXPosition;
+    }
+
+    public void setoracleCheckBoxYPosition(String m_oracleCheckBoxYPosition) {
+        this.m_oracleCheckBoxYPosition = m_oracleCheckBoxYPosition;
+    }
+    
+    
+    
     public String getoracleCheckBoxName() {
         return m_oracleCheckBoxName;
     }

@@ -27,8 +27,11 @@ import com.sun.prism.image.CompoundTexture;
 
 import java.io.IOException;
 import java.io.RandomAccessFile;
+import java.text.NumberFormat;
+import java.text.ParseException;
 
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -649,14 +652,14 @@ public class oracleGetter {
             String v_objectFontStyle   = Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
             String v_objectFontSpacing = Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
             String v_objectPrompt      =Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
-            Navigate.nextLine(15, p_fileAccess);
+            Navigate.nextLine(14, p_fileAccess);
             
             String v_objectHint        =
                 Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
             String v_objectDisplayHintAutomatically =
                 Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
             String v_objectTooltip = Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
-            
+            Navigate.nextLine(1, p_fileAccess);
             v_item = new oracleItem(v_objectName, v_objectItemType,  v_objectEnabled,
                                     v_objectJustification, v_objectMultiline, v_objectCaseRestriction,
                                     v_objectDataConceal, v_objectKeyboardNavigable, v_objectPreviousNavigationItem,
@@ -840,15 +843,14 @@ public class oracleGetter {
     public static ArrayList<oracleCheckBox> getCheckBoxInRow(ArrayList<oracleCheckBox> p_listCheckBox, int p_nbLine) {
         ArrayList<oracleCheckBox> v_listCheckBoxInRow=new ArrayList<>();
         for(oracleCheckBox v_checkBox : p_listCheckBox){
-            String[] v_positionY = v_checkBox.getoracleCheckBoxYPosition().split("\\.");
-            
-            if(v_positionY[0]==""||v_positionY.length==1){
-                
-                v_positionY[0]="0";
-            }
-            System.out.println("p_nbLine : "+p_nbLine);
-            if(v_positionY[0].equals(Integer.toString(p_nbLine))){
-                v_listCheckBoxInRow.add(v_checkBox);
+            try {
+                int v_positionY=Math.round(NumberFormat.getNumberInstance(Locale.FRANCE).parse(v_checkBox.getoracleCheckBoxYPosition()).floatValue());
+                if(v_positionY==p_nbLine){
+                    
+                    v_listCheckBoxInRow.add(v_checkBox);
+                }
+            } catch (ParseException ex) {
+                Logger.getLogger(oracleGetter.class.getName()).log(Level.SEVERE, null, ex);
             }
         
         }
@@ -862,16 +864,14 @@ public class oracleGetter {
             
             if(v_Item.getobjectVisible().equals("Yes")){
                 
-            String[] v_positionY = v_Item.getobjectPositionY().split("\\.");
-                
-            if(v_positionY[0].equals("")){
-                v_positionY[0]="0";
-                
-            }
-            if(v_positionY[0].equals(Integer.toString(p_nbLine))){
-                
-                v_listItemInRow.add(v_Item);
-            }
+                try {
+                    int v_positionY=Math.round(NumberFormat.getNumberInstance(Locale.FRANCE).parse(v_Item.getobjectPositionY()).floatValue());
+                    if(v_positionY==p_nbLine){
+                        
+                        v_listItemInRow.add(v_Item);
+                    }   } catch (ParseException ex) {
+                    Logger.getLogger(oracleGetter.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }
         return v_listItemInRow;
@@ -880,12 +880,14 @@ public class oracleGetter {
     public static ArrayList<oraclePushButton> getPushButtonInRow(ArrayList<oraclePushButton> p_listPushButton, int p_nbLine) {
         ArrayList<oraclePushButton> v_listPushButtonInRow=new ArrayList<>();
         for(oraclePushButton v_PushButton : p_listPushButton){
-            String[] v_positionY = v_PushButton.getoraclePushButtonYPosition().split("\\.");
-            if(v_positionY[0]==""){
-                v_positionY[0]="0";
-            }
-            if(v_positionY[0].equals(Integer.toString(p_nbLine))){
-                v_listPushButtonInRow.add(v_PushButton);
+            try {
+                int v_positionY=Math.round(NumberFormat.getNumberInstance(Locale.FRANCE).parse(v_PushButton.getoraclePushButtonYPosition()).floatValue());
+                if(v_positionY==p_nbLine){
+                    
+                    v_listPushButtonInRow.add(v_PushButton);
+                }
+            } catch (ParseException ex) {
+                Logger.getLogger(oracleGetter.class.getName()).log(Level.SEVERE, null, ex);
             }
         
         }
@@ -895,12 +897,14 @@ public class oracleGetter {
     public static ArrayList<oracleRadioGroup> getRadioGroupInRow(ArrayList<oracleRadioGroup> p_listRadioGroup, int p_nbLine) {
         ArrayList<oracleRadioGroup> v_listRadioGroupInRow=new ArrayList<>();
         for(oracleRadioGroup v_RadioGroup : p_listRadioGroup){
-            String[] v_positionY = v_RadioGroup.getListButton().get(0).getradioButtonYPosition().split("\\.");
-            if(v_positionY[0]==""){
-                v_positionY[0]="0";
-            }
-            if(v_positionY[0].equals(Integer.toString(p_nbLine))){
-                v_listRadioGroupInRow.add(v_RadioGroup);
+            try {
+                int v_positionY=Math.round(NumberFormat.getNumberInstance(Locale.FRANCE).parse(v_RadioGroup.getListButton().get(0).getradioButtonYPosition()).floatValue());
+                if(v_positionY==p_nbLine){
+                    
+                    v_listRadioGroupInRow.add(v_RadioGroup);
+                }
+            } catch (ParseException ex) {
+                Logger.getLogger(oracleGetter.class.getName()).log(Level.SEVERE, null, ex);
             }
         
         }
@@ -973,12 +977,14 @@ public class oracleGetter {
     public static ArrayList<GraphicTextObject> getGraphicTextObjectInRow(ArrayList<GraphicTextObject> p_listGraphicObject, int p_nbLine) {
          ArrayList<GraphicTextObject> v_listGraphicTextObjectInRow=new ArrayList<>();
         for(GraphicTextObject v_GraphicTextObject : p_listGraphicObject){
-            String[] v_positionY = v_GraphicTextObject.getgraphicTextObjectYPosition().split("\\.");
-            if(v_positionY[0]==""){
-                v_positionY[0]="0";
-            }
-            if(v_positionY[0].equals(Integer.toString(p_nbLine))){
-                v_listGraphicTextObjectInRow.add(v_GraphicTextObject);
+            try {
+                int v_positionY=Math.round(NumberFormat.getNumberInstance(Locale.FRANCE).parse(v_GraphicTextObject.getgraphicTextObjectYPosition()).floatValue());
+                if(v_positionY==p_nbLine){
+                    
+                    v_listGraphicTextObjectInRow.add(v_GraphicTextObject);
+                }
+            } catch (ParseException ex) {
+                Logger.getLogger(oracleGetter.class.getName()).log(Level.SEVERE, null, ex);
             }
         
         }

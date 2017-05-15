@@ -10,6 +10,7 @@ package com.cgi.OracleBuilderParser;
 
 import com.cgi.Tools.Localise;
 import com.cgi.Tools.Navigate;
+import com.cgi.Tools.Refactoring;
 import com.cgi.Tools.oracleChecker;
 import com.cgi.Tools.oracleGetter;
 import static com.cgi.Tools.oracleGetter.getGraphicTextObject;
@@ -151,6 +152,7 @@ public class OracleBuilderParser {
             Navigate.avancerJusqua(v_fileAccess, v_fileAccess.getFilePointer(), "* Graphics Objects");
             while(!v_fileAccess.readLine().equals("   ----------")){
                 GraphicTextObject v_graphicTextObject=getGraphicTextObject(v_fileAccess);
+                
                 if(v_graphicTextObject.getgraphicTextObjectType().equals("Text")){
                     v_listGraphicTextObject.add(v_graphicTextObject);
                 }
@@ -176,9 +178,10 @@ public class OracleBuilderParser {
     
     public static void writeFile(ArrayList<oracleBlock> p_listBlock){
         try {
+            Refactoring.RefactoPos(p_listBlock.get(0).getListItem(), p_listBlock.get(0).getlistCheckBox(), p_listBlock.get(0).getListPushButton(), p_listBlock.get(0).getlistRadioGroup(), p_listBlock.get(0).getlistGraphicObject());
             m_tailleX=Localise.getTailleX(p_listBlock.get(0).getListItem(),p_listBlock.get(0).getListPushButton(),p_listBlock.get(0).getlistCheckBox(),p_listBlock.get(0).getlistRadioGroup())+5;
             m_tailleY=Localise.getTailleY(p_listBlock.get(0).getListItem(),p_listBlock.get(0).getListPushButton(),p_listBlock.get(0).getlistCheckBox(),p_listBlock.get(0).getlistRadioGroup())+5;
-            System.out.println("je passe ici");
+            
             FileWriter v_fileWriter= new FileWriter(new File("view.html"));
             v_fileWriter.write("<!doctype html>\n");
             v_fileWriter.write("<html lang=\"fr\">\n");
@@ -191,6 +194,7 @@ public class OracleBuilderParser {
             v_fileWriter.write("<body>\n");
             v_fileWriter.write("<div class=\"container\">\n");
             for(int i=0;i<m_tailleY;i++){
+                
                 v_fileWriter.write("<div class=\"row\">\n");
                 
                 ArrayList<oracleCheckBox> v_listCheckBoxInRow=oracleGetter.getCheckBoxInRow(p_listBlock.get(0).getlistCheckBox(),i);
@@ -205,6 +209,7 @@ public class OracleBuilderParser {
                 v_fileWriter.write("<div class=\" col-sm-offset 12\">");
                 v_fileWriter.write("</div>");
                 v_fileWriter.write("</div>");
+                
             }
             v_fileWriter.write("</div>\n");
             

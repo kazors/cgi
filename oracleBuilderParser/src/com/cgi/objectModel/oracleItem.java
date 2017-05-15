@@ -183,6 +183,15 @@ public class oracleItem  {
         this.m_listMethod                     = p_listMethod;
     }
 
+    public void setobjectPositionX(String m_objectPositionX) {
+        this.m_objectPositionX = m_objectPositionX;
+    }
+
+    public void setobjectPositionY(String m_objectPositionY) {
+        this.m_objectPositionY = m_objectPositionY;
+    }
+    
+    
     public String getobjectPrompt() {
         return m_objectPrompt;
     }

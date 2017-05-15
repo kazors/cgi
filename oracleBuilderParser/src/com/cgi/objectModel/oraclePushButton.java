@@ -99,6 +99,16 @@ public class oraclePushButton {
         this.m_listMethod                               = p_listMethod;
     }
 
+    public void setoraclePushButtonXPosition(String m_oraclePushButtonXPosition) {
+        this.m_oraclePushButtonXPosition = m_oraclePushButtonXPosition;
+    }
+
+    public void setoraclePushButtonYPosition(String m_oraclePushButtonYPosition) {
+        this.m_oraclePushButtonYPosition = m_oraclePushButtonYPosition;
+    }
+    
+    
+
     public ArrayList<PlSqlMethod> getlistMethod() {
         return m_listMethod;
     }

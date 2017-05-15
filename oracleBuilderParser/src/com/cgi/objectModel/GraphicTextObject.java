@@ -62,6 +62,15 @@ public class GraphicTextObject {
         this.m_textObject = p_textObject;
     }
 
+    public void setgraphicTextObjectXPosition(String m_graphicTextObjectXPosition) {
+        this.m_graphicTextObjectXPosition = m_graphicTextObjectXPosition;
+    }
+
+    public void setgraphicTextObjectYPosition(String m_graphicTextObjectYPosition) {
+        this.m_graphicTextObjectYPosition = m_graphicTextObjectYPosition;
+    }
+    
+    
     public String getgraphicTextObjectName() {
         return m_graphicTextObjectName;
     }

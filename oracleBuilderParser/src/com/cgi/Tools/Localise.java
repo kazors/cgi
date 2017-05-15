@@ -15,6 +15,9 @@ import java.io.FileWriter;
 import java.util.ArrayList;
 import com.cgi.objectWriter.Writer;
 import java.io.IOException;
+import java.text.NumberFormat;
+import java.text.ParseException;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -31,81 +34,94 @@ public class Localise {
         oracleRadioGroup v_RadioGroup=null;
         GraphicTextObject v_GraphicTextObject=null;
         int v_posX=p_tailleX;
-        while(!(p_listCheckBoxInRow.isEmpty() && p_listItemInRow.isEmpty() && p_listPushButtonInRow.isEmpty() && p_listRadioGroupInRow.isEmpty() && p_listGraphicTextObjectInRow.isEmpty())){
+        
+        while(!(p_listCheckBoxInRow.isEmpty() && p_listItemInRow.isEmpty() && p_listPushButtonInRow.isEmpty() && p_listRadioGroupInRow.isEmpty() /*&& p_listGraphicTextObjectInRow.isEmpty()*/)){
             
            
             for(oracleCheckBox v_currentCheckBox : p_listCheckBoxInRow){
-                String v_posString=v_currentCheckBox.getoracleCheckBoxXPosition().split("\\.")[0];
-                if(v_posString.equals("")){
-                    v_posString="0";
-                }
-                int v_CurrentPosX=Integer.parseInt(v_posString);
-                
-                if(v_CurrentPosX<v_posX){
-                    v_checkBox=v_currentCheckBox;
-                    v_posX=v_CurrentPosX;
+                try {
+                    
+                    
+                    int v_CurrentPosX=Math.round((float)NumberFormat.getNumberInstance(Locale.FRANCE).parse(v_currentCheckBox.getoracleCheckBoxXPosition()).floatValue());
+                    
+                    if(v_CurrentPosX<=v_posX){
+                        
+                        v_checkBox=v_currentCheckBox;
+                        v_posX=v_CurrentPosX;
+                    }
+                } catch (ParseException ex) {
+                    Logger.getLogger(Localise.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 
             }
             
            for(oracleItem v_currentItem : p_listItemInRow){
                
-                String v_posString=v_currentItem.getobjectPositionX().split("\\.")[0];
-                if(v_posString.equals("")){
-                    v_posString="0";
-                }
-                int v_CurrentPosX=Integer.parseInt(v_posString);
-                if(v_CurrentPosX<v_posX){
-                    v_item=v_currentItem;
-                    v_checkBox=null;
-                    v_posX=v_CurrentPosX;
+                try {
+                    
+                    int v_CurrentPosX=Math.round((float)NumberFormat.getNumberInstance(Locale.FRANCE).parse(v_currentItem.getobjectPositionX()).floatValue());
+                    
+                    if(v_CurrentPosX<=v_posX){
+                        
+                        v_item=v_currentItem;
+                        v_checkBox=null;
+                        v_posX=v_CurrentPosX;
+                    }
+                } catch (ParseException ex) {
+                    Logger.getLogger(Localise.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 
             } 
            
            for(oraclePushButton v_currentPushButton : p_listPushButtonInRow){
                
-               String v_posString=v_currentPushButton.getoraclePushButtonXPosition().split("\\.")[0];
-               
-               if(v_posString.equals("")){
-                   v_posString="0";
-               }
-               int v_currentPosX=Integer.parseInt(v_posString);
-               if(v_currentPosX<v_posX){
-                   v_pushButton=v_currentPushButton;
-                   v_item=null;
-                   v_posX=v_currentPosX;
-               }
+                try {
+                    
+                    int v_currentPosX=Math.round((float)NumberFormat.getNumberInstance(Locale.FRANCE).parse(v_currentPushButton.getoraclePushButtonXPosition()).floatValue());
+                    if(v_currentPosX<=v_posX){
+                        v_pushButton=v_currentPushButton;
+                        v_item=null;
+                        v_checkBox=null;
+                        v_posX=v_currentPosX;
+                    }} catch (ParseException ex) {
+                    Logger.getLogger(Localise.class.getName()).log(Level.SEVERE, null, ex);
+                }
            }
            
            for(oracleRadioGroup v_currentRadioGroup : p_listRadioGroupInRow){
-               String v_posString=v_currentRadioGroup.getListButton().get(0).getradioButtonXPosition().split("\\.")[0];
-               if(v_posString.equals("")){
-                   v_posString="0";
-                   
-               }
-               int v_currentPosX=Integer.parseInt(v_posString);
-               if(v_currentPosX<v_posX){
-                   v_RadioGroup=v_currentRadioGroup;
-                   v_pushButton=null;
-                   v_posX=v_currentPosX;
-               }
+               
+                try {
+                    int v_currentPosX=Math.round((float)NumberFormat.getNumberInstance(Locale.FRANCE).parse(v_currentRadioGroup.getListButton().get(0).getradioButtonXPosition()).floatValue());
+                    if(v_currentPosX<=v_posX){
+                        v_RadioGroup=v_currentRadioGroup;
+                        v_pushButton=null;
+                        v_item=null;
+                        v_checkBox=null;
+                        v_posX=v_currentPosX;
+                    }} catch (ParseException ex) {
+                    Logger.getLogger(Localise.class.getName()).log(Level.SEVERE, null, ex);
+                }
            }
            
-           for(GraphicTextObject v_CurrentGraphicTextObject : p_listGraphicTextObjectInRow){
-                String v_posString=v_CurrentGraphicTextObject.getgraphicTextObjectXPosition().split("\\.")[0];
-                if(v_posString.equals("")){
-                    v_posString="0";
-                }
-                int v_CurrentPosX=Integer.parseInt(v_posString);
+          /* for(GraphicTextObject v_CurrentGraphicTextObject : p_listGraphicTextObjectInRow){
+                try {
+                    
+                    int v_CurrentPosX=Math.round(NumberFormat.getNumberInstance(Locale.FRANCE).parse(v_CurrentGraphicTextObject.getgraphicTextObjectXPosition()).floatValue());
+                    
+                    if(v_CurrentPosX<=v_posX){
+                        
+                        v_GraphicTextObject=v_CurrentGraphicTextObject;
+                        v_RadioGroup=null;
+                        v_pushButton=null;
+                        v_item=null;
+                        v_checkBox=null;
+                        v_posX=v_CurrentPosX;
+                    }
+                } catch (ParseException ex) {
+                    Logger.getLogger(Localise.class.getName()).log(Level.SEVERE, null, ex);
+                }*/
                 
-                if(v_CurrentPosX<=v_posX){
-                    v_GraphicTextObject=v_CurrentGraphicTextObject;
-                    v_RadioGroup=null;
-                    v_posX=v_CurrentPosX;
-                }
-                
-            }
+            //}
            if(v_checkBox!=null){
                Writer.WriteCheckBox(v_checkBox, p_writer);
                
@@ -122,7 +138,7 @@ public class Localise {
                
                v_posX=p_tailleX;
            }else if(v_item!=null){
-               
+               System.out.println(v_GraphicTextObject);
                Writer.writeItem(v_item,p_writer);
                
                p_listItemInRow.remove(v_item);
@@ -138,6 +154,7 @@ public class Localise {
                
                v_posX=p_tailleX;
            }else if(v_GraphicTextObject!= null){
+               
                Writer.WriteLabel(v_GraphicTextObject,p_writer);
                p_listGraphicTextObjectInRow.remove(v_GraphicTextObject);
                v_GraphicTextObject=null;
@@ -149,45 +166,50 @@ public class Localise {
     public static int getTailleX(ArrayList<oracleItem> p_listItem, ArrayList<oraclePushButton> p_listPushButton, ArrayList<oracleCheckBox> p_listCheckBox, ArrayList<oracleRadioGroup> p_listRadioGroup) {
         int v_tailleXMax=0;
         for(oracleItem v_item : p_listItem ){
-            String v_posString=v_item.getobjectPositionX().split("\\.")[0];
-            if(v_posString.equals("")){
-                v_posString="0";
-            }
-            int v_posX=Integer.parseInt(v_posString);
-            if(v_posX>v_tailleXMax){
-                v_tailleXMax=v_posX;
+            
+            try {
+                int v_posX=Math.round((NumberFormat.getNumberInstance(Locale.FRANCE).parse(v_item.getobjectPositionX()).floatValue()));
+                if(v_posX>v_tailleXMax){
+                    v_tailleXMax=v_posX;
+                }
+            } catch (ParseException ex) {
+                Logger.getLogger(Localise.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         for(oraclePushButton v_PushButton : p_listPushButton ){
-            String v_posString=v_PushButton.getoraclePushButtonXPosition().split("\\.")[0];
-            if(v_posString.equals("")){
-                v_posString="0";
-            }
-            int v_posX=Integer.parseInt(v_posString);
-            if(v_posX>v_tailleXMax){
-                v_tailleXMax=v_posX;
+            try {
+                
+                int v_posX=Math.round((float)NumberFormat.getNumberInstance(Locale.FRANCE).parse(v_PushButton.getoraclePushButtonXPosition()).floatValue());
+                if(v_posX>v_tailleXMax){
+                    v_tailleXMax=v_posX;
+                }
+            } catch (ParseException ex) {
+                Logger.getLogger(Localise.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         
         for(oracleCheckBox v_CheckBox : p_listCheckBox ){
-            String v_posString=v_CheckBox.getoracleCheckBoxXPosition().split("\\.")[0];
-            if(v_posString.equals("")){
-                v_posString="0";
-            }
-            int v_posX=Integer.parseInt(v_posString);
+            try{
+            
+            int v_posX=Math.round((float)NumberFormat.getNumberInstance(Locale.FRANCE).parse(v_CheckBox.getoracleCheckBoxXPosition()).floatValue());
             if(v_posX>v_tailleXMax){
                 v_tailleXMax=v_posX;
+            }
+            }
+            catch(ParseException e){
+                Logger.getLogger(Localise.class.getName()).log(Level.SEVERE, null, e);
             }
         }
         for(oracleRadioGroup v_radioGroup : p_listRadioGroup){
             for(oracleRadioButton v_radioButton : v_radioGroup.getListButton()){
-                String v_posString=v_radioButton.getradioButtonXPosition().split("\\.")[0];
-                if(v_posString.equals("")){
-                    v_posString="0";
-                }
-                int v_posX=Integer.parseInt(v_posString);
-                if(v_posX>v_tailleXMax){
-                    v_tailleXMax=v_posX;
+                try {
+                    
+                    int v_posX=Math.round((float)NumberFormat.getNumberInstance(Locale.FRANCE).parse(v_radioButton.getradioButtonXPosition()).floatValue());
+                    if(v_posX>v_tailleXMax){
+                        v_tailleXMax=v_posX;
+                    }
+                } catch (ParseException ex) {
+                    Logger.getLogger(Localise.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }
@@ -195,49 +217,54 @@ public class Localise {
     }
 
     public static int getTailleY(ArrayList<oracleItem> p_listItem, ArrayList<oraclePushButton> p_listPushButton, ArrayList<oracleCheckBox> p_listCheckBox, ArrayList<oracleRadioGroup> p_listRadioGroup) {
+        
         int v_tailleYMax=0;
         for(oracleItem v_item : p_listItem ){
-            String v_posString=v_item.getobjectPositionY().split("\\.")[0];
-            if(v_posString.equals("")){
-                v_posString="0";
-            }
-            int v_posY=Integer.parseInt(v_posString);
-            if(v_posY>v_tailleYMax){
-                v_tailleYMax=v_posY;
+            try {
+               
+                int v_posY=Math.round((float)NumberFormat.getNumberInstance(Locale.FRANCE).parse(v_item.getobjectPositionY()).floatValue());
+                if(v_posY>v_tailleYMax){
+                    v_tailleYMax=v_posY;
+                }
+            } catch (ParseException ex) {
+                Logger.getLogger(Localise.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         
         for(oraclePushButton v_PushButton : p_listPushButton ){
-            String v_posString=v_PushButton.getoraclePushButtonYPosition().split("\\.")[0];
-            if(v_posString.equals("")){
-                v_posString="0";
-            }
-            int v_posY=Integer.parseInt(v_posString);
-            if(v_posY>v_tailleYMax){
-                v_tailleYMax=v_posY;
+            try {
+                
+                int v_posY=Math.round((float)NumberFormat.getNumberInstance(Locale.FRANCE).parse(v_PushButton.getoraclePushButtonYPosition()).floatValue());
+                if(v_posY>v_tailleYMax){
+                    v_tailleYMax=v_posY;
+                }
+            } catch (ParseException ex) {
+                Logger.getLogger(Localise.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         
         for(oracleCheckBox v_CheckBox : p_listCheckBox ){
-            String v_posString=v_CheckBox.getoracleCheckBoxYPosition().split("\\.")[0];
-            if(v_posString.equals("")){
-                v_posString="0";
-            }
-            int v_posY=Integer.parseInt(v_posString);
-            if(v_posY>v_tailleYMax){
-                v_tailleYMax=v_posY;
+            try {
+                
+                int v_posY=Math.round((float)NumberFormat.getNumberInstance(Locale.FRANCE).parse(v_CheckBox.getoracleCheckBoxYPosition()).floatValue());
+                if(v_posY>v_tailleYMax){
+                    v_tailleYMax=v_posY;
+                }
+            } catch (ParseException ex) {
+                Logger.getLogger(Localise.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         
         for(oracleRadioGroup v_radioGroup : p_listRadioGroup){
             for(oracleRadioButton v_radioButton : v_radioGroup.getListButton()){
-                String v_posString=v_radioButton.getradioButtonYPosition().split("\\.")[0];
-                if(v_posString.equals("")){
-                    v_posString="0";
-                }
-                int v_posY=Integer.parseInt(v_posString);
-                if(v_posY>v_tailleYMax){
-                    v_tailleYMax=v_posY;
+                try {
+                    
+                    int v_posY=Math.round((float)NumberFormat.getNumberInstance(Locale.FRANCE).parse(v_radioButton.getradioButtonYPosition()).floatValue());
+                    if(v_posY>v_tailleYMax){
+                        v_tailleYMax=v_posY;
+                    }
+                } catch (ParseException ex) {
+                    Logger.getLogger(Localise.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }
