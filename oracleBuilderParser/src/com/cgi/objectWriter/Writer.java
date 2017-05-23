@@ -64,7 +64,7 @@ public class Writer {
              
             p_writer.write("<form>\n");
             System.out.println(v_item.getobjectHint());
-            p_writer.write("<input type=\"text\" name=\""+v_item.getobjectName()+"\" ><br>\n");
+            p_writer.write("<input type=\"text\" name=\""+v_item.getobjectName()+"\" MinValue=\""+v_item.getobjectMinimalValue()+"\" maxValue=\""+v_item.getobjectMaximalValue()+"\" Required=\""+v_item.getobjectRequired()+"\" TypeData=\""+v_item.getobjectDataType()+"\" Case=\""+v_item.getobjectCaseRestriction()+"\" onblur=\"checkTextItem(this)\" onkeyup=\" ApplyGoodDataCase(this)\" ><br>");
             p_writer.write("</form>\n");
             p_writer.write("</div> \n");
             

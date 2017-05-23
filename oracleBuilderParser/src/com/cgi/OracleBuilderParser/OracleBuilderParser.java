@@ -214,7 +214,7 @@ public class OracleBuilderParser {
             v_fileWriter.write("</div>\n");
             
             
-            
+            v_fileWriter.write("<script src=\"validation.js\"></script>");
             v_fileWriter.write("</body>\n");
             v_fileWriter.write("</html>\n");
             v_fileWriter.close();
