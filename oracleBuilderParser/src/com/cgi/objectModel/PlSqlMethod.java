@@ -22,7 +22,7 @@ public class PlSqlMethod {
 
     public PlSqlMethod(String p_eventName, String p_subclassInformation, String p_comments, String p_triggerStyle,
                        String p_triggerText, String p_name,String p_methodDescritpion,String p_method) {
-        this.m_name   = p_name;
+        
         this.m_eventName=p_eventName;
         this.m_subclassInformation=p_subclassInformation;
         this.m_comments=p_comments;
@@ -38,6 +38,13 @@ public class PlSqlMethod {
         return m_method;
     }
     
+    public String getName(){
+        return m_eventName;
+    }
+    
+    public String getMethodName(){
+        return m_name;
+    }
 }
 
 

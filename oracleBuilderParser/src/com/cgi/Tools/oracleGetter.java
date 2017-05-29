@@ -44,7 +44,7 @@ public class oracleGetter {
         PlSqlMethod v_plSqlMethod = null;
 
         try {
-            String v_eventName           = Refactoring.delSpace(p_fileAccess.readLine());
+            String v_eventName           = Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
             String v_subclassInformation = Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
             String v_comments            = Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
             String v_triggerStyle        = Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
