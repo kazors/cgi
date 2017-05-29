@@ -5,6 +5,7 @@
  */
 package com.cgi.objectWriter;
 
+import com.cgi.Tools.MappingTrigger;
 import com.cgi.objectModel.GraphicTextObject;
 import com.cgi.objectModel.oracleCheckBox;
 import com.cgi.objectModel.oracleItem;
@@ -24,7 +25,7 @@ public class Writer {
 
     public static void WriteCheckBox(oracleCheckBox v_checkBox, FileWriter p_writer) {
         try {
-           
+            
             p_writer.write("<div class=\"col-sm-"+"1"+"\">\n");
             p_writer.write("<form>\n");
             p_writer.write(" <input type=\"checkbox\" name=\""+v_checkBox.getoracleCheckBoxName()+"\" value=\""+v_checkBox.getoracleCheckBoxName()+"\"> "+v_checkBox.getoracleCheckBoxLabel()+"<br>\n");

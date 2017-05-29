@@ -24,6 +24,7 @@ import com.cgi.objectModel.oracleItem;
 import com.cgi.objectModel.oraclePushButton;
 import com.cgi.objectModel.oracleRadioButton;
 import com.cgi.objectModel.oracleRadioGroup;
+import com.cgi.Tools.MappingTrigger;
 
 //~--- JDK imports ------------------------------------------------------------
 
@@ -166,7 +167,7 @@ public class OracleBuilderParser {
         } catch (NullPointerException ex) {
             Logger.getLogger(OracleBuilderParser.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+       
         v_listBlock.get(0).setListItem(v_listObject);
         v_listBlock.get(0).setlistCheckBox(v_listCheckBox);
         v_listBlock.get(0).setlistPushButton(v_listPushButton);
