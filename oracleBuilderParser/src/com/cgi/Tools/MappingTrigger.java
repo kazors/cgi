@@ -51,7 +51,7 @@ public class MappingTrigger {
                                 }
                             }
                         }
-System.out.println("prout : "+v_dataBlur);
+
                         return v_dataBlur;
                     case "oracleItem":
                         oracleItem v_item = (oracleItem) p_item;
@@ -59,12 +59,13 @@ System.out.println("prout : "+v_dataBlur);
                             for (PlSqlMethod v_method : v_item.getlistMethod()) {
                                 
                                 if (v_method.getName().equals(v_trigger.getName())) {
+                                    System.out.println("v_m : "+v_method.get_method());
                                     v_dataBlur = v_dataBlur + v_method.getMethodName() + ",";
                                     
                                 }
                             }
                         }
-
+                        
                         return v_dataBlur;
                     case "oracleCheckBox":
                         oracleCheckBox v_checkBox = (oracleCheckBox) p_item;

@@ -11,7 +11,20 @@ function ApplyGoodDataCase(champ){
   }
 }
 
+function onBlur(champ){
+  console.log("Passage dans la méthode OnBlur de l'objet "+champ.getAttribute("name")+" : "+champ.getAttribute("dataBlur"))
+  if(champ.getAttribute("type")==="text"){
+    checkTextItem(champ);
+  }
+}
 
+function onClick(champ){
+  console.log("Passage dans la méthode OnClick de l'objet "+champ.getAttribute("name")+" : "+champ.getAttribute("dataOnclick"))
+}
+
+function onFocus(champ){
+  console.log("Passage dans la méthode Onfocus de l'objet "+champ.getAttribute("name")+" : "+champ.getAttribute("dataOnfocus"))
+}
 
 
 function checkTextItem(champ){

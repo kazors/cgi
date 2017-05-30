@@ -28,7 +28,7 @@ public class Writer {
             
             p_writer.write("<div class=\"col-sm-" + "1" + "\">\n");
             p_writer.write("<form>\n");
-            p_writer.write(" <input type=\"checkbox\" dataBlur=\"" + MappingTrigger.getTrigger(v_checkBox, "oracleCheckBox", "onBlur") + "\" dataOnclick=\"" + MappingTrigger.getTrigger(v_checkBox, "oracleCheckBox", "OnClick") + "\" dataOnfocus=\"" + MappingTrigger.getTrigger(v_checkBox, "oracleCheckBox", "onFocus") + "\" name=\"" + v_checkBox.getoracleCheckBoxName() + "\" value=\"" + v_checkBox.getoracleCheckBoxName() + "\"> " + v_checkBox.getoracleCheckBoxLabel() + "<br>\n");
+            p_writer.write(" <input type=\"checkbox\" dataBlur=\"" + MappingTrigger.getTrigger(v_checkBox, "oracleCheckBox", "onBlur") + "\" dataOnclick=\"" + MappingTrigger.getTrigger(v_checkBox, "oracleCheckBox", "OnClick") + "\" dataOnfocus=\"" + MappingTrigger.getTrigger(v_checkBox, "oracleCheckBox", "onFocus") + "\" name=\"" + v_checkBox.getoracleCheckBoxName() + "\" value=\"" + v_checkBox.getoracleCheckBoxName() + "\" onclick=\"onClick(this)\" onblur=\"onBlur(this)\" onfocus=\"onFocus(this)\"> " + v_checkBox.getoracleCheckBoxLabel() + "<br>\n");
             p_writer.write("</form>\n");
             p_writer.write("</div>\n");
             
@@ -45,7 +45,7 @@ public class Writer {
             
             for (oracleRadioButton v_radioButton : v_RadioGroup.getListButton()) {
                 p_writer.write("<div class=\" col-sm-2 \">\n");
-                p_writer.write("<input type=\"radio\" dataBlur=\"" + MappingTrigger.getTrigger(v_RadioGroup, "oracleRadioGroup", "onBlur") + "\" dataOnclick=\"" + MappingTrigger.getTrigger(v_RadioGroup, "oracleRadioGroup", "OnClick") + "\" dataOnfocus=\"" + MappingTrigger.getTrigger(v_RadioGroup, "oracleRadioGroup", "onFocus") + "\" name=\"" + v_RadioGroup.getoracleRadioGroupName() + "\" value=\"" + v_radioButton.getradioButtonName() + "\">" + v_radioButton.getradioButtonLabel() + "<br>\n");
+                p_writer.write("<input type=\"radio\" dataBlur=\"" + MappingTrigger.getTrigger(v_RadioGroup, "oracleRadioGroup", "onBlur") + "\" dataOnclick=\"" + MappingTrigger.getTrigger(v_RadioGroup, "oracleRadioGroup", "OnClick") + "\" dataOnfocus=\"" + MappingTrigger.getTrigger(v_RadioGroup, "oracleRadioGroup", "onFocus") + "\" name=\"" + v_RadioGroup.getoracleRadioGroupName() + "\" value=\"" + v_radioButton.getradioButtonName() + "\" \" onclick=\"onClick(this)\" onblur=\"onBlur(this)\" onfocus=\"onFocus(this)\">" + v_radioButton.getradioButtonLabel() + "<br>\n");
                 p_writer.write("</div>\n");
             }
             p_writer.write("</form>\n");
@@ -64,7 +64,7 @@ public class Writer {
             
             p_writer.write("<form>\n");
             System.out.println(v_item.getobjectHint());
-            p_writer.write("<input type=\"text\" dataBlur=\"" + MappingTrigger.getTrigger(v_item, "oracleItem", "onBlur") + "\" dataOnclick=\"" + MappingTrigger.getTrigger(v_item, "oracleItem", "OnClick") + "\" dataOnfocus=\"" + MappingTrigger.getTrigger(v_item, "oracleItem", "onFocus") + " name=\"" + v_item.getobjectName() + "\" MinValue=\"" + v_item.getobjectMinimalValue() + "\" maxValue=\"" + v_item.getobjectMaximalValue() + "\" Required=\"" + v_item.getobjectRequired() + "\" TypeData=\"" + v_item.getobjectDataType() + "\" Case=\"" + v_item.getobjectCaseRestriction() + "\" onblur=\"checkTextItem(this)\" onkeyup=\" ApplyGoodDataCase(this)\" ><br>");
+            p_writer.write("<input type=\"text\" dataBlur=\"" + MappingTrigger.getTrigger(v_item, "oracleItem", "onBlur") + "\" dataOnclick=\"" + MappingTrigger.getTrigger(v_item, "oracleItem", "OnClick") + "\" dataOnfocus=\"" + MappingTrigger.getTrigger(v_item, "oracleItem", "onFocus") + "\" name=\"" + v_item.getobjectName() + "\" MinValue=\"" + v_item.getobjectMinimalValue() + "\" maxValue=\"" + v_item.getobjectMaximalValue() + "\" Required=\"" + v_item.getobjectRequired() + "\" TypeData=\"" + v_item.getobjectDataType() + "\" Case=\"" + v_item.getobjectCaseRestriction() + "\" \" onclick=\"onClick(this)\" onblur=\"onBlur(this)\" onfocus=\"onFocus(this)\" onkeyup=\" ApplyGoodDataCase(this)\" ><br>");
             p_writer.write("</form>\n");
             p_writer.write("</div> \n");
             
@@ -77,7 +77,7 @@ public class Writer {
         try {
             
             p_writer.write("<div class=\"col-sm-" + "1" + "\">\n");
-            p_writer.write("<button type=\"button\" onclick=\"alert('" + v_pushButton.getoraclePushButtonName() + "')\" > " + "<img src=\"icone.jpg\">" + "\n");
+            p_writer.write("<button type=\"button\" dataBlur=\"" + MappingTrigger.getTrigger(v_pushButton, "oraclePushButton", "onBlur") + "\" dataOnclick=\"" + MappingTrigger.getTrigger(v_pushButton, "oraclePushButton", "OnClick") + "\" dataOnfocus=\"" + MappingTrigger.getTrigger(v_pushButton, "oraclePushButton", "onFocus") + "\" onclick=\"alert('" + v_pushButton.getoraclePushButtonName() + "')\" \" onclick=\"onClick(this)\" onblur=\"onBlur(this)\" onfocus=\"onFocus(this)\" > " + "<img src=\"icone.jpg\">" + "\n");
             p_writer.write("</div> \n");
             
         } catch (IOException ex) {

@@ -40,8 +40,9 @@ import java.util.logging.Logger;
  * @author gerardj
  */
 public class oracleGetter {
-    public static PlSqlMethod getMethod(RandomAccessFile p_fileAccess) {
+    public static ArrayList<PlSqlMethod> getMethod(RandomAccessFile p_fileAccess) {
         PlSqlMethod v_plSqlMethod = null;
+        ArrayList<PlSqlMethod> v_listMethod=new ArrayList<>();
 
         try {
             String v_eventName           = Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
@@ -49,19 +50,22 @@ public class oracleGetter {
             String v_comments            = Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
             String v_triggerStyle        = Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
             String v_triggerText         = Refactoring.delSpace(Refactoring.getValueFromLine(p_fileAccess.readLine()));
+            Navigate.nextLine(1, p_fileAccess);
             String v_name                = Refactoring.formatMethodName(p_fileAccess.readLine());
             String v_methodDescription   = Refactoring.formatMethodName(p_fileAccess.readLine());
-            String v_method              = "";
+            String v_method              = Navigate.avancerJusqua(p_fileAccess, p_fileAccess.getFilePointer(), "BEGIN");
             String v_tmp                 = "";
             Boolean v_finPlSql =false;
-            Boolean v_finBlockPlSql=false;
+            
             while(!v_finPlSql){
-                v_finBlockPlSql=false;
+               Boolean v_finBlockPlSql=false;
+               v_method="";
             while(!v_finBlockPlSql){
                 
                 v_tmp=p_fileAccess.readLine();
                 if(v_tmp.startsWith("END;")){
                     v_finBlockPlSql=true;
+                    v_listMethod.add(new PlSqlMethod(v_eventName, v_subclassInformation, v_comments, v_triggerStyle, v_triggerText, v_name, v_methodDescription, v_method));
                 }
                 
                 v_method=v_method+"\n"+v_tmp;
@@ -71,7 +75,8 @@ public class oracleGetter {
             String test=p_fileAccess.readLine().trim();
                
             if(!test.startsWith("* Fire")){
-                
+                v_name=Refactoring.formatMethodName(test);
+                v_methodDescription=p_fileAccess.readLine();
                 v_finPlSql=false;
             }else{
                 v_finPlSql=true;
@@ -86,7 +91,7 @@ public class oracleGetter {
             Logger.getLogger(OracleBuilderParser.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        return v_plSqlMethod;
+        return v_listMethod;
     }
 
     public static ArrayList<oracleRadioButton> getRadioButton(RandomAccessFile p_fileAccess) {
@@ -266,7 +271,7 @@ public class oracleGetter {
             long v_currentPos=p_fileAccess.getFilePointer();
             while((v_currentState=oracleChecker.checkWhatsNext(p_fileAccess, v_currentState)).equals("Method")){
                 
-                v_listMethod.add(getMethod(p_fileAccess));
+                v_listMethod=(getMethod(p_fileAccess));
                 v_currentPos=p_fileAccess.getFilePointer();
             }
             p_fileAccess.seek(v_currentPos);
@@ -742,7 +747,7 @@ public class oracleGetter {
             long v_currentPos=p_fileAccess.getFilePointer();
             String v_currentState="Push Button";
             while((v_currentState=oracleChecker.checkWhatsNext(p_fileAccess, v_currentState)).equals("Method")){
-                v_pushButton.getlistMethod().add(getMethod(p_fileAccess));
+                v_pushButton.getlistMethod().addAll(getMethod(p_fileAccess));
                 v_currentPos=p_fileAccess.getFilePointer();
             }
                 
@@ -828,7 +833,7 @@ public class oracleGetter {
             long v_currentPos=p_fileAccess.getFilePointer();
             String v_currentState="CheckBox";
             while((v_currentState=oracleChecker.checkWhatsNext(p_fileAccess, v_currentState)).equals("Method")){
-                v_checkBox.getlistMethod().add(getMethod(p_fileAccess));
+                v_checkBox.getlistMethod().addAll(getMethod(p_fileAccess));
                 v_currentPos=p_fileAccess.getFilePointer();
             }
                 p_fileAccess.seek(v_currentPos);

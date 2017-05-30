@@ -102,7 +102,7 @@ public class OracleBuilderParser {
                     break;
                 case "Method" :
                         
-                    v_listObject.get(v_listObject.size()-1).addMethod(oracleGetter.getMethod(v_fileAccess));
+                    v_listObject.get(v_listObject.size()-1).getlistMethod().addAll(oracleGetter.getMethod(v_fileAccess));
                     
                     m_currentState=oracleChecker.checkWhatsNext(v_fileAccess, m_currentState);
                     
