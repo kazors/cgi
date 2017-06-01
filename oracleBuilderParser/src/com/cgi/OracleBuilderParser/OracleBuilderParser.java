@@ -192,7 +192,7 @@ public class OracleBuilderParser {
             v_fileWriter.write(" <link href=\"bootstrap/css/bootstrap.min.css\" rel=\"stylesheet\"");
             v_fileWriter.write(" <link href=\"bootstrap/css/bootstrap-theme.min.css\" rel=\"stylesheett\"");
             v_fileWriter.write("</head>\n");
-            v_fileWriter.write("<body>\n");
+            v_fileWriter.write("<body >\n");
             v_fileWriter.write("<div class=\"container\">\n");
             for(int i=0;i<m_tailleY;i++){
                 

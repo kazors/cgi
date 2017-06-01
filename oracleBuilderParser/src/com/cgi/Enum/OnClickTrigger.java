@@ -11,7 +11,7 @@ package com.cgi.Enum;
  */
 public enum OnClickTrigger {
     ButtonPressed("WHEN-BUTTON-PRESSED"),CheckboxChanged("WHEN-CHECKBOXCHANGED"),ImageActivated("WHEN-IMAGE-ACTIVATED"),ListActivated("WHEN-LIST_ACTIVATED"),ListChanged("WHEN-LIST-CHANGED")
-    ,RadioChanged("WHEN-RADIO-CHANGED"),ImagePressed("WHEN-IMAGE-PRESSED");
+    ,RadioChanged("WHEN-RADIO-CHANGED"),ImagePressed("WHEN-IMAGE-PRESSED"),MouseClick("WHEN-MOUSE-CLICK");
         private String name;
 
     private OnClickTrigger(String p_name) {

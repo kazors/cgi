@@ -27,8 +27,8 @@ public class Writer {
         try {
             
             p_writer.write("<div class=\"col-sm-" + "1" + "\">\n");
-            p_writer.write("<form>\n");
-            p_writer.write(" <input type=\"checkbox\" dataBlur=\"" + MappingTrigger.getTrigger(v_checkBox, "oracleCheckBox", "onBlur") + "\" dataOnclick=\"" + MappingTrigger.getTrigger(v_checkBox, "oracleCheckBox", "OnClick") + "\" dataOnfocus=\"" + MappingTrigger.getTrigger(v_checkBox, "oracleCheckBox", "onFocus") + "\" name=\"" + v_checkBox.getoracleCheckBoxName() + "\" value=\"" + v_checkBox.getoracleCheckBoxName() + "\" onclick=\"onClick(this)\" onblur=\"onBlur(this)\" onfocus=\"onFocus(this)\"> " + v_checkBox.getoracleCheckBoxLabel() + "<br>\n");
+            p_writer.write("<form >\n");
+            p_writer.write(" <input type=\"checkbox\" dataonMouseOver=\""+MappingTrigger.getTrigger(v_checkBox, "oracleCheckBox", "onMouseOver")+"\" dataOnMouseUp=\""+MappingTrigger.getTrigger(v_checkBox, "oracleCheckBox", "onMouseUp")+"\" dataOnMouseOut=\""+MappingTrigger.getTrigger(v_checkBox, "oracleCheckBox", "onMouseOut")+"\" dataOnMouseMove=\""+MappingTrigger.getTrigger(v_checkBox, "oracleCheckBox", "onMouseMove")+"\" dataOnMouseDown=\""+MappingTrigger.getTrigger(v_checkBox, "oracleCheckBox", "onMouseDown")+"\" dataOnDblClick=\""+MappingTrigger.getTrigger(v_checkBox, "oracleCheckBox", "onDblClick")+"\" dataBlur=\"" + MappingTrigger.getTrigger(v_checkBox, "oracleCheckBox", "onBlur") + "\" dataOnclick=\"" + MappingTrigger.getTrigger(v_checkBox, "oracleCheckBox", "OnClick") + "\" dataOnfocus=\"" + MappingTrigger.getTrigger(v_checkBox, "oracleCheckBox", "onFocus") + "\" name=\"" + v_checkBox.getoracleCheckBoxName() + "\" value=\"" + v_checkBox.getoracleCheckBoxName() + "\" onclick=\"onClick(this)\" onblur=\"onBlur(this)\" onfocus=\"onFocus(this)\"> " + v_checkBox.getoracleCheckBoxLabel() + "<br>\n");
             p_writer.write("</form>\n");
             p_writer.write("</div>\n");
             
